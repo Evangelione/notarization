@@ -1,0 +1,22 @@
+@import "./common/theme";
+
+html, body, #root {
+  height: 100%;
+  color: @font-color;
+  background-color: @background-gray;
+}
+
+body {
+  margin: 0;
+}
+
+.search-input {
+  & > input {
+    border-color: @primary-red;
+  }
+}
+
+.ant-carousel {
+  height: 360px;
+  display: inline-block;
+}

@@ -1,0 +1,35 @@
+@import "../../common/theme";
+
+.list-item {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  cursor: pointer;
+
+  &>div {
+    margin-top: 14px;
+  }
+
+  & > div:nth-child(1) {
+    padding-left: 12px;
+  }
+
+  & > div:nth-child(1):before {
+    content: '';
+    width: 3px;
+    height: 3px;
+    background-color: @font-color;
+    border-radius: 3px;
+    position: absolute;
+    top: 24px;
+    left: 0;
+  }
+
+  & > div:nth-child(2) {
+   color: @font-color-light;
+  }
+}
+
+.list-item:hover {
+  color: @primary-red
+}
