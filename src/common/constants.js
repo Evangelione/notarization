@@ -6,31 +6,31 @@ export const IconFont = Icon.createFromIconfontCN({
 
 export const navBar = [{
   label: '首页',
-  link: '/',
+  path: '/',
 }, {
   label: '服务中心',
-  link: '/',
+  path: '/dynamicList',
 }, {
   label: '工作动态',
-  link: '/',
+  path: '/dynamicList',
 }, {
   label: '行业动态',
-  link: '/',
+  path: '/dynamicList',
 }, {
   label: '通知公告',
-  link: '/',
+  path: '/dynamicList',
 }, {
   label: '法律法规',
-  link: '/',
+  path: '/dynamicList',
 }, {
   label: '理论园地',
-  link: '/',
+  path: '/dynamicList',
 }, {
   label: '机构介绍',
-  link: '/',
+  path: '/dynamicList',
 }, {
   label: '网络培训',
-  link: '/',
+  path: '/dynamicList',
 }];
 
 export const list = [{
@@ -107,6 +107,88 @@ export const list1 = [{
 
 
 export const list2 = [{
+  label: '全国首家互联网公证处杭州揭牌',
+  time: '2018-12-05',
+  id: '1',
+}, {
+  label: '全国首家互联网公证处杭州揭牌',
+  time: '2018-12-05',
+  id: '1',
+}, {
+  label: '全国首家互联网公证处杭州揭牌',
+  time: '2018-12-05',
+  id: '1',
+}, {
+  label: '全国首家互联网公证处杭州揭牌',
+  time: '2018-12-05',
+  id: '1',
+}, {
+  label: '全国首家互联网公证处杭州揭牌',
+  time: '2018-12-05',
+  id: '1',
+}];
+
+export const list3 = [{
+  label: '全国首家互联网公证处杭州揭牌',
+  time: '2018-12-05',
+  id: '1',
+}, {
+  label: '全国首家互联网公证处杭州揭牌',
+  time: '2018-12-05',
+  id: '1',
+}, {
+  label: '全国首家互联网公证处杭州揭牌',
+  time: '2018-12-05',
+  id: '1',
+}, {
+  label: '全国首家互联网公证处杭州揭牌',
+  time: '2018-12-05',
+  id: '1',
+}, {
+  label: '全国首家互联网公证处杭州揭牌',
+  time: '2018-12-05',
+  id: '1',
+},{
+  label: '全国首家互联网公证处杭州揭牌',
+  time: '2018-12-05',
+  id: '1',
+}, {
+  label: '全国首家互联网公证处杭州揭牌',
+  time: '2018-12-05',
+  id: '1',
+}, {
+  label: '全国首家互联网公证处杭州揭牌',
+  time: '2018-12-05',
+  id: '1',
+}, {
+  label: '全国首家互联网公证处杭州揭牌',
+  time: '2018-12-05',
+  id: '1',
+}, {
+  label: '全国首家互联网公证处杭州揭牌',
+  time: '2018-12-05',
+  id: '1',
+},{
+  label: '全国首家互联网公证处杭州揭牌',
+  time: '2018-12-05',
+  id: '1',
+}, {
+  label: '全国首家互联网公证处杭州揭牌',
+  time: '2018-12-05',
+  id: '1',
+}, {
+  label: '全国首家互联网公证处杭州揭牌',
+  time: '2018-12-05',
+  id: '1',
+}, {
+  label: '全国首家互联网公证处杭州揭牌',
+  time: '2018-12-05',
+  id: '1',
+}, {
+  label: '全国首家互联网公证处杭州揭牌',
+  time: '2018-12-05',
+  id: '1',
+},{
   label: '全国首家互联网公证处杭州揭牌',
   time: '2018-12-05',
   id: '1',

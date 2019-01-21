@@ -6,7 +6,7 @@
   position: relative;
   cursor: pointer;
 
-  &>div {
+  & > div {
     margin-top: 14px;
   }
 
@@ -26,10 +26,18 @@
   }
 
   & > div:nth-child(2) {
-   color: @font-color-light;
+    color: @font-color-light;
   }
+
 }
 
 .list-item:hover {
   color: @primary-red
+}
+
+.dashed-line {
+  width: 100%;
+  border-bottom: 1px dashed @gray-line;
+  margin-top: 25px;
+  margin-bottom: 10px;
 }

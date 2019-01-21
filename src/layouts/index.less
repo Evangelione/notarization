@@ -54,6 +54,11 @@
         line-height: 44px;
         text-align: center;
         cursor: pointer;
+        transition: all .3s
+      }
+
+      & > div:hover {
+        background-color: @deep-red;
       }
 
       .nav-item-active {
@@ -76,7 +81,24 @@
   text-align: center;
   padding-top: 25px;
 
-  &> div {
+  & > div {
     margin: 10px;
   }
+}
+
+.popoverItem {
+  width: 120px;
+  color: @primary-white;
+  padding: 11px 30px;
+  background-color: @primary-red;
+  cursor: pointer;
+  transition: all .2s;
+}
+
+.popoverItem:hover {
+  background-color: @deep-red;
+}
+
+.popoverItem-active {
+  background-color: @deep-red;
 }

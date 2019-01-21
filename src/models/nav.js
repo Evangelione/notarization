@@ -2,6 +2,7 @@ export default {
   namespace: 'nav',
   state: {
     currentLink: 0,
+    currentPopover: 0
   },
 
   subscriptions: {

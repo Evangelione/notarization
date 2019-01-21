@@ -1,6 +1,7 @@
 @import "./common/theme";
 
 html, body, #root {
+  min-width: 1100px;
   height: 100%;
   color: @font-color;
   background-color: @background-gray;
@@ -19,4 +20,13 @@ body {
 .ant-carousel {
   height: 360px;
   display: inline-block;
+}
+
+.ant-popover-inner-content {
+  padding: 0 !important;
+}
+
+.ant-popover-placement-bottom > .ant-popover-content > .ant-popover-arrow, .ant-popover-placement-bottomLeft > .ant-popover-content > .ant-popover-arrow, .ant-popover-placement-bottomRight > .ant-popover-content > .ant-popover-arrow {
+  border-top-color: @primary-red!important;
+  border-left-color: @primary-red!important;
 }

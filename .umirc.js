@@ -8,7 +8,7 @@ export default {
       antd: true,
       dva: true,
       dynamicImport: { webpackChunkName: true },
-      title: 'notarization',
+      title: 'Notarization',
       dll: true,
       routes: {
         exclude: [
