@@ -3,9 +3,10 @@ import DynamicTitle from '../../components/DynamicTitle/index'
 
 class Index extends Component {
   render() {
+    const { module } = this.props.location.query;
     return (
       <DynamicTitle>
-        123
+        {module}
       </DynamicTitle>
     );
   }
