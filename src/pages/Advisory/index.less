@@ -1,0 +1,45 @@
+@import "../../common/theme";
+
+.question-box {
+  background-color: @primary-white;
+  margin-bottom: 24px;
+  box-shadow: 4px 4px 15px 1px @gray-line;
+  border-radius: 4px;
+
+  .question {
+    height: 80px;
+    line-height: 80px;
+    font-size: 18px;
+    color: @primary-black;
+    padding-left: 33px;
+    font-weight: bold;
+  }
+
+  .answers {
+    padding: 0 24px;
+
+    & > div {
+      border-top: 1px solid @gray-line;
+      border-bottom: 1px solid @gray-line;
+      line-height: 26px;
+      color: @font-color-deep;
+      padding: 20px 10px;
+    }
+  }
+
+  .extend {
+    height: 48px;
+    line-height: 48px;
+    padding: 0 24px;
+    text-align: right;
+    & > div {
+      display: inline-block;
+      color: @font-color-light;
+      font-size: 13px;
+    }
+
+    .red-link {
+      color: @primary-red;
+    }
+  }
+}

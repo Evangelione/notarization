@@ -6,35 +6,11 @@ import moment from 'moment';
 import 'moment/locale/zh-cn';
 import { connect } from 'dva';
 import router from 'umi/router';
-import { navBar } from '@/common/constants';
+import { navBar, popoverItem } from '@/common/constants';
 import styles from './index.less';
 
 moment.locale('zh-cn');
 const Search = Input.Search;
-
-const popoverItem = [{
-  label: '涉台公证',
-  path: '/notarization',
-  value: '涉台公证副本查询'
-}, {
-  label: '公证机构',
-  path: '/notaryOffice',
-  value: '公证机构及人员名录'
-}, {
-  label: '撤证公告',
-  path: '/revokeCertificate',
-}, {
-  label: '办证指南',
-  path: '/certificateGuide',
-}, {
-  label: '咨询',
-  path: '/advisory',
-  value: '公证咨询'
-}, {
-  label: '报表下载',
-  path: '/reportDownload',
-}];
-
 
 @connect(({ nav }) => ({
   nav,
@@ -99,6 +75,16 @@ class Index extends Component {
     });
   };
 
+  goSearchPage = (value) => {
+    router.push({
+      pathname: '/searchPage',
+      query: {
+        module: '搜索',
+        find_str: value,
+      },
+    });
+  };
+
   render() {
     const { children } = this.props;
     return (
@@ -120,7 +106,7 @@ class Index extends Component {
                 <img src={require('@/assets/images/logo.png')} alt=""/>
                 <Search
                   placeholder="请输入关键词搜索"
-                  onSearch={value => console.log(value)}
+                  onSearch={this.goSearchPage}
                   enterButton
                   style={{ width: 360 }}
                   className='search-input'

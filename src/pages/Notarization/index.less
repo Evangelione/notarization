@@ -1,0 +1,26 @@
+@import "../../common/theme";
+
+.search-box {
+  display: flex;
+  margin-bottom: 46px;
+
+  & > div {
+    flex: 1;
+    margin-top: 10px;
+
+    &>div:nth-child(1) {
+      font-size: 16px;
+      color: @font-color
+    }
+
+    &>div:nth-child(2) {
+      width: 500px;
+      height: 260px;
+      border: 1px solid @gray-line;
+      font-size: 16px;
+      color: @font-color;
+      margin-top: 16px;
+      padding: 24px;
+    }
+  }
+}

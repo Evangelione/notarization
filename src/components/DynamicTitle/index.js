@@ -16,6 +16,7 @@ class Index extends Component {
       '/certificateGuide': `${module}`,
       '/advisory': `${module}`,
       '/reportDownload': `${module}`,
+      '/searchPage': `${module}`,
     };
     const pathSnippets = location.pathname.split('/').filter(i => i);
     console.log(pathSnippets);
