@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { Button } from 'antd';
+import { Button, Modal, Input } from 'antd';
 import DynamicTitle from '../../components/DynamicTitle/index';
 import { IconFont } from '@/common/constants';
 import styles from './index.less';
+
+const TextArea = Input.TextArea;
 
 const AdvisoryList = [{
   question: '为什么杭州市余杭公证处有两个地址',
@@ -32,12 +34,30 @@ const AdvisoryList = [{
 
 
 class Index extends Component {
+  state = {
+    visible: false,
+  };
+  showModal = (e) => {
+    e && e.stopPropagation();
+    this.setState({
+      visible: true,
+    });
+  };
+
+  hideModal = (e) => {
+    e && e.stopPropagation();
+    this.setState({
+      visible: false,
+    });
+  };
+
   render() {
+    const { visible } = this.state;
     return (
       <div>
         <DynamicTitle>
-          <div style={{textAlign: 'right', marginTop: 20}}>
-            <Button type='primary'>我要咨询</Button>
+          <div style={{ textAlign: 'right', marginTop: 20 }}>
+            <Button type='primary' onClick={this.showModal}>我要咨询</Button>
           </div>
         </DynamicTitle>
         <div style={{ marginTop: 24 }}>
@@ -56,6 +76,14 @@ class Index extends Component {
             </div>;
           })}
         </div>
+        <Modal
+          visible={visible}
+          footer={null}
+          onCancel={this.hideModal}>
+          <div style={{ fontSize: 24, textAlign: 'center', marginBottom: 30 }}>咨询</div>
+          <TextArea placeholder='请输入你要咨询的内容'/>
+          <Button type='primary' style={{ marginTop: 30, textAlign: 'center' }}>咨询</Button>
+        </Modal>
       </div>
     );
   }

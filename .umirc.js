@@ -1,4 +1,3 @@
-const path = require('path');
 // ref: https://umijs.org/config/
 export default {
   treeShaking: true,
@@ -23,9 +22,6 @@ export default {
       },
     }],
   ],
-  alias: {
-    '@': path.resolve(__dirname, './src'),
-  },
   theme: {
     'primary-color': '#C72D29',
   },
