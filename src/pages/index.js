@@ -54,7 +54,6 @@ const links = [{
 
 class Index extends Component {
   render() {
-    console.log(this.props.children);
     return (
       <div>
         <div className={styles['container']} style={{ padding: '18px 18px 8px' }}>

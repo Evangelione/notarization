@@ -17,6 +17,7 @@ class Index extends Component {
       '/advisory': `${module}`,
       '/reportDownload': `${module}`,
       '/searchPage': `${module}`,
+      '/article': `${module}`,
     };
     const pathSnippets = location.pathname.split('/').filter(i => i);
     console.log(pathSnippets);
@@ -35,7 +36,6 @@ class Index extends Component {
         <Link to="/">首页</Link>
       </Breadcrumb.Item>
     )].concat(extraBreadcrumbItems);
-    console.log(this.props);
     return (
       <div className={styles['dynamic-container']}>
         <div className={styles['dynamic-nav']} style={{ marginBottom: 10 }}>

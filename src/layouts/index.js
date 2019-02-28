@@ -6,63 +6,80 @@ import moment from 'moment';
 import 'moment/locale/zh-cn';
 import { connect } from 'dva';
 import router from 'umi/router';
-import { navBar, popoverItem } from '@/common/constants';
+import { popoverItem } from '@/common/constants';
 import styles from './index.less';
 
 moment.locale('zh-cn');
 const Search = Input.Search;
 
-@connect(({ nav }) => ({
-  nav,
+@connect(({ global }) => ({
+  global,
 }))
 class Index extends Component {
 
+  componentWillMount() {
+    this.props.dispatch({
+      type: 'global/fetchNavBar',
+      payload: {},
+    });
+  }
+
   mapNavItem = () => {
-    const { currentLink, currentPopover } = this.props.nav;
+    const { currentLink, currentPopover, navBar } = this.props.global;
     const content = (
       <div>
         {popoverItem.map((value, index) => {
           return <div key={index}
                       className={currentPopover === index ? classnames(styles['popoverItem'], styles['popoverItem-active']) : styles['popoverItem']}
-                      onClick={this.popoverClick.bind(null, index, value.label, value.path)}>{value.label}</div>;
+                      onClick={this.popoverClick.bind(null, index, value.name, value.path)}>{value.name}</div>;
         })}
       </div>
     );
     return navBar.map((value, index) => {
-      if (value.label === '服务中心') {
+      if (value.name === '服务中心') {
         return <Popover placement="bottomLeft" trigger="click" key={index} content={content}>
           <div className={currentLink === index ? styles['nav-item-active'] : ''}
-               onClick={this.linkClick.bind(null, index, value.label, value.path)}>
-            {value.label}
+               onClick={this.linkClick.bind(null, index, value.name, value.path, value.id)}>
+            {value.name}
           </div>
         </Popover>;
       }
       return <div key={index} className={currentLink === index ? styles['nav-item-active'] : ''}
-                  onClick={this.linkClick.bind(null, index, value.label, value.path)}>{value.label}</div>;
+                  onClick={this.linkClick.bind(null, index, value.name, value.path, value.id)}>{value.name}</div>;
     });
   };
 
-  linkClick = (index, label, path) => {
-
+  linkClick = (index, name, path, id) => {
     this.props.dispatch({
-      type: 'nav/save',
+      type: 'global/save',
       payload: {
         currentLink: index,
-        currentPopover: label === '服务中心' ? this.props.nav.currentPopover : null,
+        currentPopover: name === '服务中心' ? this.props.global.currentPopover : null,
       },
     });
-    if (label === '服务中心') return false;
-    router.push({
-      pathname: path,
-      query: {
-        module: label,
-      },
-    });
+    if (name === '服务中心') return false;
+    if (name === '首页') {
+      router.push({
+        pathname: '/',
+        query: {
+          module: '首页',
+        },
+      });
+    } else {
+      router.push({
+        pathname: '/dynamicList',
+        query: {
+          id,
+          module: name,
+        },
+      });
+    }
+
   };
 
-  popoverClick = (index, label, path) => {
+  popoverClick = (index, name, path) => {
     this.props.dispatch({
-      type: 'nav/save',
+      type: 'global/save',
       payload: {
         currentPopover: index,
       },
@@ -70,7 +87,7 @@ class Index extends Component {
     router.push({
       pathname: path,
       query: {
-        module: label,
+        module: name,
       },
     });
   };
