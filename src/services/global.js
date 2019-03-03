@@ -1,5 +1,6 @@
 import request from '@/common/request';
-//
+import { pageSize } from '@/common/constants';
+
 // export function inquireCascadeOptions({ module, district_name }) {
 //   let formData = new FormData()
 //   formData.append('district_name', district_name)
@@ -40,6 +41,28 @@ export function fetchNavBar() {
 
 export function fetchArticle(id) {
   return request(`http://118.31.46.146:8080/api/article?articleId=${id}`, {
+    method: 'GET',
+    credentials: 'omit',
+  });
+}
+
+
+export function fetchDynamicList({ id, pageNo }) {
+  return request(`http://118.31.46.146:8080/api/article/list?categoryId=${id}&pageNo=${pageNo}&pageSize=${pageSize}`, {
+    method: 'GET',
+    credentials: 'omit',
+  });
+}
+
+export function searchList({ keyword, pageNo }) {
+  return request(`http://118.31.46.146:8080/api/search?keyword=${keyword}&pageNo=${pageNo}&pageSize=${pageSize}`, {
+    method: 'GET',
+    credentials: 'omit',
+  });
+}
+
+export function fetchCarouselMap() {
+  return request(`http://118.31.46.146:8080/api/image/article`, {
     method: 'GET',
     credentials: 'omit',
   });

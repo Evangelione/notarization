@@ -9,6 +9,10 @@ export default {
     currentPopover: '',
     navBar: [],
     article: {},
+    dynamicList: [],
+    dynamicPage: 1,
+    dynamicTotal: 0,
+    carouselMap: [],
   },
 
   subscriptions: {
@@ -82,7 +86,46 @@ export default {
         message.error(data.msg);
       }
     },
-
+    * fetchDynamicList({ payload: { pageNo = 1, id } }, { call, put }) {
+      const { data } = yield call(globalServices.fetchDynamicList, { pageNo, id });
+      parseInt(data.code, 10) === 1 ?
+        yield put({
+          type: 'save',
+          payload: {
+            dynamicList: data.data.list,
+            dynamicPage: parseInt(pageNo, 10),
+            dynamicTotal: parseInt(data.data.count, 10),
+          },
+        })
+        :
+        message.error(data.msg);
+    },
+    * searchList({ payload: { pageNo = 1, keyword } }, { call, put }) {
+      const { data } = yield call(globalServices.searchList, { pageNo, keyword });
+      parseInt(data.code, 10) === 1 ?
+        yield put({
+          type: 'save',
+          payload: {
+            dynamicList: data.data.list,
+            dynamicPage: parseInt(pageNo, 10),
+            dynamicTotal: parseInt(data.data.count, 10),
+          },
+        })
+        :
+        message.error(data.msg);
+    },
+    * fetchCarouselMap({ payload }, { call, put }) {
+      const { data } = yield call(globalServices.fetchCarouselMap);
+      parseInt(data.code, 10) === 1 ?
+        yield put({
+          type: 'save',
+          payload: {
+            carouselMap: data.data.list,
+          },
+        })
+        :
+        message.error(data.msg);
+    },
   },
 
   reducers: {
