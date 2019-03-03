@@ -3,20 +3,8 @@ import { List } from 'antd';
 import DynamicTitle from '../../components/DynamicTitle/index';
 import { connect } from 'dva';
 import styles from '@/pages/ReportDownload/index.less';
-
-const data = [{
-  title: '全国首家互联网公证处在杭州揭牌',
-  time: '2018-12-05',
-}, {
-  title: '全国首家互联网公证处在杭州揭牌',
-  time: '2018-12-05',
-}, {
-  title: '全国首家互联网公证处在杭州揭牌',
-  time: '2018-12-05',
-}, {
-  title: '全国首家互联网公证处在杭州揭牌',
-  time: '2018-12-05',
-}];
+import router from 'umi/router';
+import listStyles from '@/components/List/index.less';
 
 @connect(({ global }) => ({
   global,
@@ -31,6 +19,22 @@ class Index extends Component {
       },
     });
   }
+
+  goArticle = (id) => {
+    router.replace({
+      pathname: '/article',
+      query: {
+        module: '相关内容',
+        articleId: id,
+      },
+    });
+    this.props.dispatch({
+      type: 'global/fetchArticle',
+      payload: {
+        id,
+      },
+    });
+  };
 
   render() {
     const { article } = this.props.global;
@@ -48,15 +52,14 @@ class Index extends Component {
           <div>
             <div className={styles['list-title']}>相关内容</div>
             <List itemLayout="horizontal"
-                  dataSource={data}
-                  renderItem={item => (
-                    <List.Item>
-                      <List.Item.Meta
-                        title={<a href="https://ant.design" style={{ paddingLeft: 18 }}>{item.title}</a>}
-                      />
-                      <div>{item.time}</div>
-                    </List.Item>
-                  )}/>
+                  dataSource={article.relationList}
+                  renderItem={item => {
+                    console.log(item);
+                    return <List.Item onClick={this.goArticle.bind(null, item[1])}>
+                      <List.Item.Meta title={<div className={listStyles['list-item']} style={{ paddingLeft: 18 }}>{item[2]}</div>}/>
+                      <div>{item[3]}</div>
+                    </List.Item>;
+                  }}/>
           </div>
         </div>
       </DynamicTitle>

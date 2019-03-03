@@ -67,3 +67,17 @@ export function fetchCarouselMap() {
     credentials: 'omit',
   });
 }
+
+export function fetchNavBarList() {
+  return request(`http://118.31.46.146:8080/api/three/article`, {
+    method: 'GET',
+    credentials: 'omit',
+  });
+}
+
+export function fetchMiddleBar() {
+  return request(`http://118.31.46.146:8080/api/service/category`, {
+    method: 'GET',
+    credentials: 'omit',
+  });
+}

@@ -24,7 +24,7 @@ class CarouselMap extends Component {
       <Carousel afterChange={this.onChange} autoplay style={{ display: 'inline-block' }} className={styles['carousel']}>
         {carouselMap.map((value, index) => (
           <div key={index}>
-            <img src={value.image} style={{ width: '100%', height: 360 }} alt=""/>
+            <img src={`http://118.31.46.146:8080${value.image}`} style={{ width: '100%', height: 360 }} alt=""/>
           </div>
         ))}
       </Carousel>

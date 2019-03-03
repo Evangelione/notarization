@@ -7,12 +7,14 @@ export default {
   state: {
     currentLink: 0,
     currentPopover: '',
+    barLink: 'work',
     navBar: [],
     article: {},
     dynamicList: [],
     dynamicPage: 1,
     dynamicTotal: 0,
     carouselMap: [],
+    threeNavBarList: [],
   },
 
   subscriptions: {
@@ -121,6 +123,32 @@ export default {
           type: 'save',
           payload: {
             carouselMap: data.data.list,
+          },
+        })
+        :
+        message.error(data.msg);
+    },
+    * fetchNavBarList({ payload }, { call, put }) {
+      const { data } = yield call(globalServices.fetchNavBarList);
+      console.log(data.data);
+      parseInt(data.code, 10) === 1 ?
+        yield put({
+          type: 'save',
+          payload: {
+            threeNavBarList: data.data,
+          },
+        })
+        :
+        message.error(data.msg);
+    },
+    * fetchMiddleBar({ payload }, { call, put }) {
+      const { data } = yield call(globalServices.fetchMiddleBar);
+      console.log(data.data);
+      parseInt(data.code, 10) === 1 ?
+        yield put({
+          type: 'save',
+          payload: {
+            threeNavBarList: data.data,
           },
         })
         :

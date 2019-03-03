@@ -20,7 +20,7 @@ class Index extends Component {
     const { list, hasLine } = this.props;
     return (
       <div style={{ display: 'inline-block', width: '100%' }}>
-        {list.map((value, index) => {
+        {list && list.map((value, index) => {
           if (!!index && (index + 1) % hasLine === 0) {
             return <div key={index} onClick={this.goArticle.bind(null, value.id)}>
               <div className={styles['list-item']}>

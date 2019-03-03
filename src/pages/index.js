@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import CarouselMap from '@/components/CarouselMap/CarouselMap';
 import List from '@/components/List/index';
 import ListTitle from '@/components/ListTitle/index';
-import { IconFont, list, list1, list2 } from '@/common/constants';
+import { IconFont, list1, list2 } from '@/common/constants';
 import classnames from 'classnames';
 import styles from './index.less';
+import { connect } from 'dva';
 
 const ServiceCenter = [{
   label: '涉台公证书副本查询',
@@ -52,19 +53,64 @@ const links = [{
   link: '/',
 }];
 
+@connect(({ global }) => ({
+  global,
+}))
 class Index extends Component {
+  state = {
+    currList: [],
+  };
+
+  componentDidMount() {
+    this.props.dispatch({
+      type: 'global/fetchNavBarList',
+      payload: {},
+    }).then(() => {
+      this.setState({
+        currList: this.props.global.threeNavBarList.work,
+      });
+    });
+
+    this.props.dispatch({
+      type: 'global/fetchMiddleBar',
+      payload: {},
+    });
+
+  }
+
+  changeBarLink = (curr) => {
+    this.props.dispatch({
+      type: 'global/save',
+      payload: {
+        barLink: curr,
+      },
+    });
+    this.setState({
+      currList: this.props.global.threeNavBarList[curr],
+    });
+  };
+
   render() {
+    const { currList } = this.state;
+    const { barLink } = this.props.global;
+    console.log(currList);
     return (
       <div>
         <div className={styles['container']} style={{ padding: '18px 18px 8px' }}>
           <CarouselMap/>
           <div className={styles['list-box']}>
             <div>
-              <div>工作动态</div>
-              <div>行业动态</div>
-              <div>通知公告</div>
+              <div className={barLink === 'work' ? styles['currentLink'] : ''}
+                   onClick={this.changeBarLink.bind(null, 'work')}>工作动态
+              </div>
+              <div className={barLink === 'industry' ? styles['currentLink'] : ''}
+                   onClick={this.changeBarLink.bind(null, 'industry')}>行业动态
+              </div>
+              <div className={barLink === 'notify' ? styles['currentLink'] : ''}
+                   onClick={this.changeBarLink.bind(null, 'notify')}>通知公告
+              </div>
             </div>
-            <List list={list}/>
+            <List list={currList}/>
           </div>
         </div>
         <div className={classnames(styles['container'], styles['service-center'])} style={{ marginTop: 24 }}>
@@ -118,15 +164,17 @@ class Index extends Component {
 
         <div className={styles['container']} style={{ marginTop: 12, marginBottom: 24, width: 538, height: 160 }}>
           <ListTitle title={'友情链接'} link={false}/>
-          <div style={{paddingTop: 14}}>
+          <div style={{ paddingTop: 14 }}>
             {links.map((value, index) => {
-              return <div key={index} style={{ display: 'inline-block', marginRight: 48, marginTop: 12 }}>{value.label}</div>;
+              return <div key={index}
+                          style={{ display: 'inline-block', marginRight: 48, marginTop: 12 }}>{value.label}</div>;
             })}
           </div>
         </div>
-        <div className={styles['container']} style={{ marginTop: 24, marginLeft: 24, marginBottom: 24, width: 538, height: 160 }}>
+        <div className={styles['container']}
+             style={{ marginTop: 24, marginLeft: 24, marginBottom: 24, width: 538, height: 160 }}>
           <ListTitle title={'投诉中心'} link={false}/>
-          <div style={{paddingTop: 14}}>
+          <div style={{ paddingTop: 14 }}>
             <div style={{ display: 'inline-block', marginRight: 48, marginTop: 12 }}>电话：0571-81956940</div>
             <div style={{ display: 'inline-block', marginRight: 48, marginTop: 12 }}>邮箱：zjsgzxhtszx@163.com</div>
             <div style={{ display: 'inline-block', marginRight: 48, marginTop: 12 }}>地址：杭州市文三路252号伟星大厦20楼A座</div>

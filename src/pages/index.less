@@ -12,9 +12,37 @@
   vertical-align: top;
   padding-left: 25px;
 
-  & > div {
+  & > div:first-child {
     display: flex;
     justify-content: space-between;
+    font-size: 18px;
+    font-weight: bold;
+    color: #000;
+    cursor: pointer;
+    border-top: 1px solid @gray-line;
+    padding-top: 15px;
+
+    & > div {
+      position: relative;
+    }
+
+    & > div:after {
+      content: '';
+      position: absolute;
+      top: 6px;
+      right: -44px;
+      width: 2px;
+      height: 14px;
+      background-color: #aaa;
+    }
+
+    & > div:last-child:after {
+      display: none;
+    }
+
+    & > div:hover {
+      color: @primary-red;
+    }
   }
 }
 
@@ -90,4 +118,18 @@
   & > div:hover {
     transform: scale(1.05);
   }
+}
+
+.currentLink {
+  color: @primary-red;
+}
+
+.currentLink:before {
+  content: '';
+  position: absolute;
+  width: 70px;
+  height: 2px;
+  background-color: @primary-red;
+  top: -16px;
+  left: 0;
 }
