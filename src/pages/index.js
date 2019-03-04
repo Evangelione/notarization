@@ -6,6 +6,7 @@ import { IconFont, list1, list2 } from '@/common/constants';
 import classnames from 'classnames';
 import styles from './index.less';
 import { connect } from 'dva';
+import router from 'umi/router';
 
 const ServiceCenter = [{
   label: '涉台公证书副本查询',
@@ -62,6 +63,7 @@ class Index extends Component {
   };
 
   componentDidMount() {
+    // 获取navBar
     this.props.dispatch({
       type: 'global/fetchNavBarList',
       payload: {},
@@ -71,11 +73,23 @@ class Index extends Component {
       });
     });
 
+    // 获取服务中心linkItem
     this.props.dispatch({
       type: 'global/fetchMiddleBar',
       payload: {},
     });
 
+    // 获取友情链接
+    this.props.dispatch({
+      type: 'global/fetchFriendLink',
+      payload: {},
+    });
+
+    // 获取外部链接
+    this.props.dispatch({
+      type: 'global/fetchOutLink',
+      payload: {},
+    });
   }
 
   changeBarLink = (curr) => {
@@ -90,9 +104,22 @@ class Index extends Component {
     });
   };
 
+  goDynamicList = (path, name) => {
+    router.push({
+      pathname: path,
+      query: {
+        module: name,
+      },
+    });
+  };
+
+  openWindow = (url) => {
+    window.location.href = url;
+  };
+
   render() {
     const { currList } = this.state;
-    const { barLink } = this.props.global;
+    const { barLink, middleBar, friendLink, outLink } = this.props.global;
     console.log(currList);
     return (
       <div>
@@ -117,10 +144,11 @@ class Index extends Component {
           <div style={{ marginLeft: 0 }}>
             服务<br/>中心
           </div>
-          {ServiceCenter.map((value, index) => {
-            return <div key={index}>
-              <IconFont type={value.icon} style={{ fontSize: 26 }}/>
-              <div style={{ width: 70 }}>{value.label}</div>
+          {middleBar.map((value, index) => {
+            return <div key={index} onClick={this.goDynamicList.bind(null, value.href, value.name)}>
+              {/*<IconFont type={value.icon} style={{ fontSize: 26 }}/>*/}
+              <img src={`http://118.31.46.146:8080${value.image}`} style={{ width: 26, height: 26 }} alt=""/>
+              <div style={{ width: 70 }}>{value.name}</div>
             </div>;
           })}
         </div>
@@ -135,18 +163,25 @@ class Index extends Component {
 
         <div className={classnames(styles['container'], styles['image-content'])}
              style={{ marginTop: 24, width: '100%' }}>
-          <div style={{ marginLeft: 0 }}>
-            <img src={require('@/assets/images/006bYgeozy7pHERNHmg18&690.jpg')} alt=""/>
-            <div>浙江公证服务平台</div>
-          </div>
-          <div>
-            <img src={require('@/assets/images/006bYgeozy7pHERNHmg18&690.jpg')} alt=""/>
-            <div>涉外公证认证</div>
-          </div>
-          <div>
-            <img src={require('@/assets/images/006bYgeozy7pHERNHmg18&690.jpg')} alt=""/>
-            <div>敬请期待</div>
-          </div>
+          {outLink.map((value, index) => {
+            return <div key={index} onClick={this.openWindow.bind(null, value.href)}
+                        style={{ marginLeft: index === 0 ? 0 : 14 }}>
+              <img src={require('@/assets/images/006bYgeozy7pHERNHmg18&690.jpg')} alt=""/>
+              <div>{value.title}</div>
+            </div>;
+          })}
+          {/*<div style={{ marginLeft: 0 }}>*/}
+          {/*<img src={require('@/assets/images/006bYgeozy7pHERNHmg18&690.jpg')} alt=""/>*/}
+          {/*<div>浙江公证服务平台</div>*/}
+          {/*</div>*/}
+          {/*<div>*/}
+          {/*<img src={require('@/assets/images/006bYgeozy7pHERNHmg18&690.jpg')} alt=""/>*/}
+          {/*<div>涉外公证认证</div>*/}
+          {/*</div>*/}
+          {/*<div>*/}
+          {/*<img src={require('@/assets/images/006bYgeozy7pHERNHmg18&690.jpg')} alt=""/>*/}
+          {/*<div>敬请期待</div>*/}
+          {/*</div>*/}
         </div>
 
         <div className={styles['container']} style={{ marginTop: 24, width: 351 }}>
@@ -165,9 +200,13 @@ class Index extends Component {
         <div className={styles['container']} style={{ marginTop: 12, marginBottom: 24, width: 538, height: 160 }}>
           <ListTitle title={'友情链接'} link={false}/>
           <div style={{ paddingTop: 14 }}>
-            {links.map((value, index) => {
-              return <div key={index}
-                          style={{ display: 'inline-block', marginRight: 48, marginTop: 12 }}>{value.label}</div>;
+            {friendLink.map((value, index) => {
+              return <a key={index} href={value.href} style={{
+                display: 'inline-block',
+                marginRight: 48,
+                marginTop: 12,
+                color: '#4A4A4A',
+              }}>{value.title}</a>;
             })}
           </div>
         </div>

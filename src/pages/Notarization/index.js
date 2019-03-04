@@ -3,6 +3,7 @@ import { Table } from 'antd';
 import SearchForm from './components/SearchForm';
 import DynamicTitle from '../../components/DynamicTitle/index';
 import styles from './index.less';
+import { connect } from 'dva';
 
 const columns = [{
   title: '寄出日期',
@@ -52,7 +53,7 @@ const data = [{
   man: '妄人',
   project: '外资',
   type: '快递',
-  remarks: '无'
+  remarks: '无',
 }, {
   key: '2',
   time: '2019-02-03',
@@ -63,7 +64,7 @@ const data = [{
   man: '妄人',
   project: '外资',
   type: '快递',
-  remarks: '无'
+  remarks: '无',
 }, {
   key: '3',
   time: '2019-02-03',
@@ -74,29 +75,33 @@ const data = [{
   man: '妄人',
   project: '外资',
   type: '快递',
-  remarks: '无'
+  remarks: '无',
 }];
 
+@connect(({ notarization }) => ({
+  notarization,
+}))
 class Index extends Component {
   render() {
+    const { searchList } = this.props.notarization;
     return (
       <DynamicTitle>
         <div className={styles['search-box']}>
           <div>
             <div>寄送查询</div>
             <div>
-              <SearchForm/>
+              <SearchForm type='js'/>
             </div>
           </div>
-          <div style={{marginLeft: 55}}>
+          <div style={{ marginLeft: 55 }}>
             <div>收到查询</div>
             <div>
-              <SearchForm/>
+              <SearchForm type='sd'/>
             </div>
           </div>
         </div>
-        <div style={{borderTop: '1px solid #9b9b9b'}}>
-          <Table dataSource={data} columns={columns}/>
+        <div style={{ borderTop: '1px solid #9b9b9b' }}>
+          <Table dataSource={searchList} columns={columns}/>
         </div>
       </DynamicTitle>
     );

@@ -15,6 +15,9 @@ export default {
     dynamicTotal: 0,
     carouselMap: [],
     threeNavBarList: [],
+    middleBar: [],
+    friendLink: [],
+    outLink: [],
   },
 
   subscriptions: {
@@ -72,7 +75,7 @@ export default {
           },
         });
       } else {
-        message.error(data.msg);
+        message.error(data.message);
       }
     },
     * fetchArticle({ payload: { id } }, { call, put }) {
@@ -85,7 +88,7 @@ export default {
           },
         });
       } else {
-        message.error(data.msg);
+        message.error(data.message);
       }
     },
     * fetchDynamicList({ payload: { pageNo = 1, id } }, { call, put }) {
@@ -100,7 +103,7 @@ export default {
           },
         })
         :
-        message.error(data.msg);
+        message.error(data.message);
     },
     * searchList({ payload: { pageNo = 1, keyword } }, { call, put }) {
       const { data } = yield call(globalServices.searchList, { pageNo, keyword });
@@ -114,7 +117,7 @@ export default {
           },
         })
         :
-        message.error(data.msg);
+        message.error(data.message);
     },
     * fetchCarouselMap({ payload }, { call, put }) {
       const { data } = yield call(globalServices.fetchCarouselMap);
@@ -126,7 +129,7 @@ export default {
           },
         })
         :
-        message.error(data.msg);
+        message.error(data.message);
     },
     * fetchNavBarList({ payload }, { call, put }) {
       const { data } = yield call(globalServices.fetchNavBarList);
@@ -139,7 +142,7 @@ export default {
           },
         })
         :
-        message.error(data.msg);
+        message.error(data.message);
     },
     * fetchMiddleBar({ payload }, { call, put }) {
       const { data } = yield call(globalServices.fetchMiddleBar);
@@ -148,11 +151,37 @@ export default {
         yield put({
           type: 'save',
           payload: {
-            threeNavBarList: data.data,
+            middleBar: data.data,
           },
         })
         :
-        message.error(data.msg);
+        message.error(data.message);
+    },
+    * fetchFriendLink({ payload }, { call, put }) {
+      const { data } = yield call(globalServices.fetchFriendLink);
+      console.log(data.data);
+      parseInt(data.code, 10) === 1 ?
+        yield put({
+          type: 'save',
+          payload: {
+            friendLink: data.data.list,
+          },
+        })
+        :
+        message.error(data.message);
+    },
+    * fetchOutLink({ payload }, { call, put }) {
+      const { data } = yield call(globalServices.fetchOutLink);
+      console.log(data.data);
+      parseInt(data.code, 10) === 1 ?
+        yield put({
+          type: 'save',
+          payload: {
+            outLink: data.data.list,
+          },
+        })
+        :
+        message.error(data.message);
     },
   },
 

@@ -1,16 +1,62 @@
 import React, { Component } from 'react';
-import { Form, Input, Row, Col, Select, Button } from 'antd';
+import { Form, Input, Row, Col, Select, Button, message } from 'antd';
+import { connect } from 'dva';
 
 const Option = Select.Option;
 
+
+@connect(({ notarization }) => ({
+  notarization,
+}))
 @Form.create()
 class SearchForm extends Component {
+  state = {
+    time: '',
+    num: '',
+    field: null,
+  };
+  search = () => {
+    const { time, num, field } = this.state;
+    if (time === '' || num === '' || field === null) {
+      message.error('请输入完整信息后查询');
+    } else {
+      let effect = this.props.type === 'js' ? 'fetchJS' : 'fetchSD';
+      this.props.dispatch({
+        type: `notarization/${effect}`,
+        payload: {
+          year: time,
+          bh: num,
+          office: field,
+        },
+      });
+    }
+  };
+
+  changeField = (value) => {
+    this.setState({
+      field: value,
+    });
+  };
+
+  changeTime = (e) => {
+    this.setState({
+      time: e.target.value,
+    });
+  };
+
+  changeNum = (e) => {
+    this.setState({
+      num: e.target.value,
+    });
+  };
+
   render() {
     const formItemLayout = {
       labelCol: { span: 20 },
       wrapperCol: { span: 20 },
     };
     // const { getFieldDecorator } = this.props.form;
+    const { time, num } = this.state;
     return (
       <Form layout='vertical'>
         <Row>
@@ -19,11 +65,7 @@ class SearchForm extends Component {
               label="年度"
               {...formItemLayout}
             >
-              <Select placeholder="选择年度">
-                <Option value='1'>1</Option>
-                <Option value='3'>2</Option>
-                <Option value='2'>3</Option>
-              </Select>
+              <Input placeholder='填写年度' value={time} onChange={this.changeTime}/>
             </Form.Item>
           </Col>
           <Col span={10}>
@@ -31,7 +73,7 @@ class SearchForm extends Component {
               label="证书号"
               {...formItemLayout}
             >
-              <Input placeholder="填写证书号"/>
+              <Input placeholder="填写证书号" value={num} onChange={this.changeNum}/>
             </Form.Item>
           </Col>
           <Col span={24}>
@@ -40,7 +82,7 @@ class SearchForm extends Component {
               labelCol={{ span: 20 }}
               wrapperCol={{ span: 15 }}
             >
-              <Select placeholder="选择年度">
+              <Select placeholder="选择年度" onChange={this.changeField}>
                 <Option value='1'>1</Option>
                 <Option value='3'>2</Option>
                 <Option value='2'>3</Option>
@@ -49,12 +91,12 @@ class SearchForm extends Component {
           </Col>
           <Col span={24}>
             <Form.Item
-              style={{marginTop:10}}
+              style={{ marginTop: 10 }}
               labelCol={{ span: 20 }}
               wrapperCol={{ span: 15 }}
             >
-              <Button type='primary'>查询</Button>
-              <span className='spanHover' style={{marginLeft: 24, cursor: 'pointer', fontWeight: 'bold'}}>清空</span>
+              <Button type='primary' onClick={this.search}>查询</Button>
+              <span className='spanHover' style={{ marginLeft: 24, cursor: 'pointer', fontWeight: 'bold' }}>清空</span>
             </Form.Item>
           </Col>
         </Row>

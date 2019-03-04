@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Button, Modal, Input } from 'antd';
+import { Button, Modal, Input, Pagination } from 'antd';
 import DynamicTitle from '../../components/DynamicTitle/index';
 import { IconFont } from '@/common/constants';
 import styles from './index.less';
+import { connect } from 'dva';
 
 const TextArea = Input.TextArea;
 
@@ -32,15 +33,27 @@ const AdvisoryList = [{
   link: false,
 }];
 
-
+@connect(({ advisory }) => ({
+  advisory,
+}))
 class Index extends Component {
   state = {
     visible: false,
+    advisoryContent: '',
   };
+
+  componentDidMount() {
+    this.props.dispatch({
+      type: 'advisory/fetchAdvisoryList',
+      payload: {},
+    });
+  }
+
   showModal = (e) => {
     e && e.stopPropagation();
     this.setState({
       visible: true,
+      advisoryContent: '',
     });
   };
 
@@ -48,11 +61,39 @@ class Index extends Component {
     e && e.stopPropagation();
     this.setState({
       visible: false,
+      advisoryContent: '',
+    });
+  };
+
+  pageChange = (page) => {
+    this.props.dispatch({
+      type: 'advisory/fetchAdvisoryList',
+      payload: {
+        pageNo: page,
+      },
+    });
+  };
+  changeAdvisoryContent = (e) => {
+    this.setState({
+      advisoryContent: e.target.value,
+    });
+  };
+
+  postAdvisory = () => {
+    this.props.dispatch({
+      type: 'advisory/postAdvisory',
+      payload: {
+        value: this.state.advisoryContent,
+      },
+    }).then(() => {
+      this.hideModal();
     });
   };
 
   render() {
-    const { visible } = this.state;
+    const { visible, advisoryContent } = this.state;
+    const { advisoryList, advisoryPage, advisoryTotal } = this.props.advisory;
+    console.log(advisoryList);
     return (
       <div>
         <DynamicTitle>
@@ -61,28 +102,34 @@ class Index extends Component {
           </div>
         </DynamicTitle>
         <div style={{ marginTop: 24 }}>
-          {AdvisoryList.map((value, index) => {
+          {advisoryList.map((value, index) => {
             return <div className={styles['question-box']} key={index}>
-              <div className={styles['question']}><span style={{ fontSize: 34 }}>Q. </span>{value.question}</div>
+              <div className={styles['question']}><span style={{ fontSize: 34 }}>Q. </span>{value.content}</div>
               <div className={styles['answers']}>
-                <div><span style={{ fontSize: 34, color: '#000' }}>A. </span>{value.answers}</div>
+                <div><span style={{ fontSize: 34, color: '#000' }}>A. </span>{value.reContent}</div>
               </div>
               <div className={styles['extend']}>
                 <div style={{ marginRight: 44 }}><IconFont type='icon-dianzan_'
                                                            style={{ marginRight: 8, cursor: 'pointer' }}/>{value.useful}
                 </div>
-                <div><IconFont type='icon-shijian_' style={{ marginRight: 8 }}/>{value.time}</div>
+                <div><IconFont type='icon-shijian_' style={{ marginRight: 8 }}/>{value.createDate}</div>
               </div>
             </div>;
           })}
         </div>
+        <div style={{ textAlign: 'center', marginBottom: 30 }}>
+          <Pagination showQuickJumper defaultCurrent={advisoryPage} total={advisoryTotal} onChange={this.pageChange}
+                      style={{ marginTop: 30, marginBottom: 5 }}/>
+        </div>
         <Modal
           visible={visible}
           footer={null}
+          style={{ textAlign: 'center' }}
           onCancel={this.hideModal}>
           <div style={{ fontSize: 24, textAlign: 'center', marginBottom: 30 }}>咨询</div>
-          <TextArea placeholder='请输入你要咨询的内容'/>
-          <Button type='primary' style={{ marginTop: 30, textAlign: 'center' }}>咨询</Button>
+          <TextArea placeholder='请输入你要咨询的内容' style={{ height: 135 }} value={advisoryContent}
+                    onChange={this.changeAdvisoryContent}/>
+          <Button type='primary' style={{ marginTop: 30, textAlign: 'center' }} onClick={this.postAdvisory}>咨询</Button>
         </Modal>
       </div>
     );

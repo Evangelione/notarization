@@ -81,3 +81,17 @@ export function fetchMiddleBar() {
     credentials: 'omit',
   });
 }
+
+export function fetchFriendLink() {
+  return request(`http://118.31.46.146:8080/api/links`, {
+    method: 'GET',
+    credentials: 'omit',
+  });
+}
+
+export function fetchOutLink() {
+  return request(`http://118.31.46.146:8080/api/outlinks`, {
+    method: 'GET',
+    credentials: 'omit',
+  });
+}
