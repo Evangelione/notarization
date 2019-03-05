@@ -57,6 +57,7 @@ class SearchForm extends Component {
     };
     // const { getFieldDecorator } = this.props.form;
     const { time, num } = this.state;
+    const { office } = this.props;
     return (
       <Form layout='vertical'>
         <Row>
@@ -83,9 +84,9 @@ class SearchForm extends Component {
               wrapperCol={{ span: 15 }}
             >
               <Select placeholder="选择年度" onChange={this.changeField}>
-                <Option value='1'>1</Option>
-                <Option value='3'>2</Option>
-                <Option value='2'>3</Option>
+                {office.map((value, index) => (
+                  <Option key={index} value={value.id}>{value.name}</Option>
+                ))}
               </Select>
             </Form.Item>
           </Col>

@@ -13,3 +13,10 @@ export function fetchSD(year, bh, office) {
     credentials: 'omit',
   });
 }
+
+export function fetchNotarizationList() {
+  return request(`http://118.31.46.146:8080/api/office/list`, {
+    method: 'GET',
+    credentials: 'omit',
+  });
+}

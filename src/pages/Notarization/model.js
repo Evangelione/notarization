@@ -6,6 +6,7 @@ export default {
   namespace: 'notarization',
   state: {
     searchList: [],
+    notarizationList: [],
   },
 
   subscriptions: {
@@ -34,6 +35,18 @@ export default {
       //   message.success(data.message)
       //   :
       //   message.error(data.message);
+    },
+    * fetchNotarizationList({ payload }, { call, put }) {
+      const { data } = yield call(notarizationServices.fetchNotarizationList);
+      parseInt(data.code, 10) === 1 ?
+        yield put({
+          type: 'save',
+          payload: {
+            notarizationList: data.data,
+          },
+        })
+        :
+        message.error(data.message);
     },
   },
 

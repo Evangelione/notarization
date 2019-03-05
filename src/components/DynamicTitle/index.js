@@ -20,7 +20,6 @@ class Index extends Component {
       '/article': `${module}`,
     };
     const pathSnippets = location.pathname.split('/').filter(i => i);
-    console.log(pathSnippets);
     const extraBreadcrumbItems = pathSnippets.map((_, index) => {
       const url = `/${pathSnippets.slice(0, index + 1).join('/')}`;
       return (

@@ -2,57 +2,57 @@ import React, { Component } from 'react';
 import CarouselMap from '@/components/CarouselMap/CarouselMap';
 import List from '@/components/List/index';
 import ListTitle from '@/components/ListTitle/index';
-import { IconFont, list1, list2 } from '@/common/constants';
+import { list1, list2 } from '@/common/constants';
 import classnames from 'classnames';
 import styles from './index.less';
 import { connect } from 'dva';
 import router from 'umi/router';
 
-const ServiceCenter = [{
-  label: '涉台公证书副本查询',
-  icon: 'icon-xinxichaxuncopy',
-  path: '/',
-}, {
-  label: '公证机构',
-  icon: 'icon-jigoukehudaishenhesh',
-  path: '/',
-}, {
-  label: '撤证公告',
-  icon: 'icon-ccgl-chedanguanli-',
-  path: '/',
-}, {
-  label: '办证指南',
-  icon: 'icon-guidecopy',
-  path: '/',
-}, {
-  label: '咨询',
-  icon: 'icon-zixunfuwucopy',
-  path: '/',
-}, {
-  label: '报表下载',
-  icon: 'icon-xiazai_copy',
-  path: '/',
-}];
-
-const links = [{
-  label: '上海公证网',
-  link: '/',
-}, {
-  label: '温州公证网',
-  link: '/',
-}, {
-  label: '福建公证网',
-  link: '/',
-}, {
-  label: '西部公证网',
-  link: '/',
-}, {
-  label: '中国司法部',
-  link: '/',
-}, {
-  label: '中国普法网',
-  link: '/',
-}];
+// const ServiceCenter = [{
+//   label: '涉台公证书副本查询',
+//   icon: 'icon-xinxichaxuncopy',
+//   path: '/',
+// }, {
+//   label: '公证机构',
+//   icon: 'icon-jigoukehudaishenhesh',
+//   path: '/',
+// }, {
+//   label: '撤证公告',
+//   icon: 'icon-ccgl-chedanguanli-',
+//   path: '/',
+// }, {
+//   label: '办证指南',
+//   icon: 'icon-guidecopy',
+//   path: '/',
+// }, {
+//   label: '咨询',
+//   icon: 'icon-zixunfuwucopy',
+//   path: '/',
+// }, {
+//   label: '报表下载',
+//   icon: 'icon-xiazai_copy',
+//   path: '/',
+// }];
+//
+// const links = [{
+//   label: '上海公证网',
+//   link: '/',
+// }, {
+//   label: '温州公证网',
+//   link: '/',
+// }, {
+//   label: '福建公证网',
+//   link: '/',
+// }, {
+//   label: '西部公证网',
+//   link: '/',
+// }, {
+//   label: '中国司法部',
+//   link: '/',
+// }, {
+//   label: '中国普法网',
+//   link: '/',
+// }];
 
 @connect(({ global }) => ({
   global,
@@ -60,6 +60,7 @@ const links = [{
 class Index extends Component {
   state = {
     currList: [],
+    currTitle: '工作动态',
   };
 
   componentDidMount() {
@@ -92,7 +93,7 @@ class Index extends Component {
     });
   }
 
-  changeBarLink = (curr) => {
+  changeBarLink = (curr, title) => {
     this.props.dispatch({
       type: 'global/save',
       payload: {
@@ -101,14 +102,16 @@ class Index extends Component {
     });
     this.setState({
       currList: this.props.global.threeNavBarList[curr],
+      currTitle: title,
     });
   };
 
-  goDynamicList = (path, name) => {
+  goDynamicList = (path, name, id) => {
     router.push({
       pathname: path,
       query: {
         module: name,
+        id,
       },
     });
   };
@@ -118,9 +121,8 @@ class Index extends Component {
   };
 
   render() {
-    const { currList } = this.state;
+    const { currList, currTitle } = this.state;
     const { barLink, middleBar, friendLink, outLink } = this.props.global;
-    console.log(currList);
     return (
       <div>
         <div className={styles['container']} style={{ padding: '18px 18px 8px' }}>
@@ -128,16 +130,16 @@ class Index extends Component {
           <div className={styles['list-box']}>
             <div>
               <div className={barLink === 'work' ? styles['currentLink'] : ''}
-                   onClick={this.changeBarLink.bind(null, 'work')}>工作动态
+                   onClick={this.changeBarLink.bind(null, 'work', '工作动态')}>工作动态
               </div>
               <div className={barLink === 'industry' ? styles['currentLink'] : ''}
-                   onClick={this.changeBarLink.bind(null, 'industry')}>行业动态
+                   onClick={this.changeBarLink.bind(null, 'industry', '行业动态')}>行业动态
               </div>
               <div className={barLink === 'notify' ? styles['currentLink'] : ''}
-                   onClick={this.changeBarLink.bind(null, 'notify')}>通知公告
+                   onClick={this.changeBarLink.bind(null, 'notify', '通知公告')}>通知公告
               </div>
             </div>
-            <List list={currList}/>
+            <List list={currList} title={currTitle}/>
           </div>
         </div>
         <div className={classnames(styles['container'], styles['service-center'])} style={{ marginTop: 24 }}>
@@ -145,7 +147,7 @@ class Index extends Component {
             服务<br/>中心
           </div>
           {middleBar.map((value, index) => {
-            return <div key={index} onClick={this.goDynamicList.bind(null, value.href, value.name)}>
+            return <div key={index} onClick={this.goDynamicList.bind(null, value.href, value.name, value.id)}>
               {/*<IconFont type={value.icon} style={{ fontSize: 26 }}/>*/}
               <img src={`http://118.31.46.146:8080${value.image}`} style={{ width: 26, height: 26 }} alt=""/>
               <div style={{ width: 70 }}>{value.name}</div>
@@ -153,12 +155,12 @@ class Index extends Component {
           })}
         </div>
         <div className={styles['container']} style={{ marginTop: 24, width: 658 }}>
-          <ListTitle title={'案例精选'} link='123'/>
-          <List list={list1}/>
+          <ListTitle title={'案例精选'} link={true}/>
+          <List list={list1} title={'案例精选'}/>
         </div>
         <div className={styles['container']} style={{ marginTop: 24, marginLeft: 24, width: 418 }}>
-          <ListTitle title={'理论园地'} link='123'/>
-          <List list={list1}/>
+          <ListTitle title={'理论园地'} link={true}/>
+          <List list={list1} title={'理论园地'}/>
         </div>
 
         <div className={classnames(styles['container'], styles['image-content'])}
@@ -185,16 +187,16 @@ class Index extends Component {
         </div>
 
         <div className={styles['container']} style={{ marginTop: 24, width: 351 }}>
-          <ListTitle title={'网络培训'} link='123'/>
-          <List list={list2}/>
+          <ListTitle title={'网络培训'} link={true}/>
+          <List list={list2} title={'网络培训'}/>
         </div>
         <div className={styles['container']} style={{ marginTop: 24, marginLeft: 24, width: 351 }}>
-          <ListTitle title={'法律法规'} link='123'/>
-          <List list={list2}/>
+          <ListTitle title={'法律法规'} link={true}/>
+          <List list={list2} title={'法律法规'}/>
         </div>
         <div className={styles['container']} style={{ marginTop: 24, marginLeft: 24, width: 350 }}>
-          <ListTitle title={'公证期刊'} link='123'/>
-          <List list={list2}/>
+          <ListTitle title={'公证期刊'} link={true}/>
+          <List list={list2} title={'公证期刊'}/>
         </div>
 
         <div className={styles['container']} style={{ marginTop: 12, marginBottom: 24, width: 538, height: 160 }}>

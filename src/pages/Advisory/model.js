@@ -39,6 +39,13 @@ export default {
         :
         message.error(data.message);
     },
+    * useful({ payload: { id } }, { call, put }) {
+      const { data } = yield call(advisoryServices.useful, id);
+      parseInt(data.code, 10) === 1 ?
+        message.success(data.message)
+        :
+        message.error(data.message);
+    },
   },
 
   reducers: {

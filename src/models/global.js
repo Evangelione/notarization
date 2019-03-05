@@ -133,7 +133,6 @@ export default {
     },
     * fetchNavBarList({ payload }, { call, put }) {
       const { data } = yield call(globalServices.fetchNavBarList);
-      console.log(data.data);
       parseInt(data.code, 10) === 1 ?
         yield put({
           type: 'save',
@@ -146,7 +145,6 @@ export default {
     },
     * fetchMiddleBar({ payload }, { call, put }) {
       const { data } = yield call(globalServices.fetchMiddleBar);
-      console.log(data.data);
       parseInt(data.code, 10) === 1 ?
         yield put({
           type: 'save',
@@ -159,7 +157,6 @@ export default {
     },
     * fetchFriendLink({ payload }, { call, put }) {
       const { data } = yield call(globalServices.fetchFriendLink);
-      console.log(data.data);
       parseInt(data.code, 10) === 1 ?
         yield put({
           type: 'save',
@@ -172,7 +169,6 @@ export default {
     },
     * fetchOutLink({ payload }, { call, put }) {
       const { data } = yield call(globalServices.fetchOutLink);
-      console.log(data.data);
       parseInt(data.code, 10) === 1 ?
         yield put({
           type: 'save',

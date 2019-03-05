@@ -54,7 +54,6 @@ class Index extends Component {
             <List itemLayout="horizontal"
                   dataSource={article.relationList}
                   renderItem={item => {
-                    console.log(item);
                     return <List.Item onClick={this.goArticle.bind(null, item[1])}>
                       <List.Item.Meta title={<div className={listStyles['list-item']} style={{ paddingLeft: 18 }}>{item[2]}</div>}/>
                       <div>{item[3]}</div>

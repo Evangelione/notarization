@@ -10,7 +10,7 @@ class Index extends Component {
     router.push({
       pathname: '/article',
       query: {
-        module,
+        module: this.props.title ? this.props.title : module,
         articleId: id,
       },
     });

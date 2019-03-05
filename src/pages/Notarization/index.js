@@ -43,60 +43,67 @@ const columns = [{
   dataIndex: 'remarks',
 }];
 
-const data = [{
-  key: '1',
-  time: '2019-02-03',
-  name: 'John Brown',
-  code: 4432436767,
-  year: 2019,
-  office: '杭州市国立公证处',
-  man: '妄人',
-  project: '外资',
-  type: '快递',
-  remarks: '无',
-}, {
-  key: '2',
-  time: '2019-02-03',
-  name: 'John Brown',
-  code: 4432436767,
-  year: 2019,
-  office: '杭州市国立公证处',
-  man: '妄人',
-  project: '外资',
-  type: '快递',
-  remarks: '无',
-}, {
-  key: '3',
-  time: '2019-02-03',
-  name: 'John Brown',
-  code: 4432436767,
-  year: 2019,
-  office: '杭州市国立公证处',
-  man: '妄人',
-  project: '外资',
-  type: '快递',
-  remarks: '无',
-}];
+// const data = [{
+//   key: '1',
+//   time: '2019-02-03',
+//   name: 'John Brown',
+//   code: 4432436767,
+//   year: 2019,
+//   office: '杭州市国立公证处',
+//   man: '妄人',
+//   project: '外资',
+//   type: '快递',
+//   remarks: '无',
+// }, {
+//   key: '2',
+//   time: '2019-02-03',
+//   name: 'John Brown',
+//   code: 4432436767,
+//   year: 2019,
+//   office: '杭州市国立公证处',
+//   man: '妄人',
+//   project: '外资',
+//   type: '快递',
+//   remarks: '无',
+// }, {
+//   key: '3',
+//   time: '2019-02-03',
+//   name: 'John Brown',
+//   code: 4432436767,
+//   year: 2019,
+//   office: '杭州市国立公证处',
+//   man: '妄人',
+//   project: '外资',
+//   type: '快递',
+//   remarks: '无',
+// }];
 
 @connect(({ notarization }) => ({
   notarization,
 }))
 class Index extends Component {
+  componentDidMount() {
+    this.props.dispatch({
+      type: 'notarization/fetchNotarizationList',
+      payload: {},
+    });
+  }
+
   render() {
-    const { searchList } = this.props.notarization;
+    const { searchList, notarizationList } = this.props.notarization;
     return (
       <DynamicTitle>
         <div className={styles['search-box']}>
           <div>
             <div>寄送查询</div>
             <div>
-              <SearchForm type='js'/>
+              <SearchForm type='js' office={notarizationList}/>
             </div>
           </div>
           <div style={{ marginLeft: 55 }}>
             <div>收到查询</div>
             <div>
-              <SearchForm type='sd'/>
+              <SearchForm type='sd' office={notarizationList}/>
             </div>
           </div>
         </div>

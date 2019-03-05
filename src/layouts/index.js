@@ -32,7 +32,7 @@ class Index extends Component {
             {value.childList.map((value, index) => {
               return <div key={index}
                           className={currentPopover === index ? classnames(styles['popoverItem'], styles['popoverItem-active']) : styles['popoverItem']}
-                          onClick={this.popoverClick.bind(null, index, value.name, value.href)}>{value.name}</div>;
+                          onClick={this.popoverClick.bind(null, index, value.name, value.href, value.id)}>{value.name}</div>;
             })}
           </div>
         );
@@ -81,18 +81,24 @@ class Index extends Component {
     }
   };
 
-  popoverClick = (index, name, path) => {
-    console.log(path);
+  popoverClick = (index, name, path, id) => {
     this.props.dispatch({
       type: 'global/save',
       payload: {
         currentPopover: index,
       },
     });
+    path === '/dynamicList' && this.props.dispatch({
+      type: 'global/fetchDynamicList',
+      payload: {
+        id,
+      },
+    });
     router.push({
       pathname: path,
       query: {
         module: name,
+        id,
       },
     });
   };
@@ -113,6 +119,16 @@ class Index extends Component {
     });
   };
 
+  getCurrDate = () => {
+    let oDate = new Date();
+    let year = oDate.getFullYear();
+    let month = oDate.getMonth() + 1;
+    let day = oDate.getDate();
+    let Arr = ['日', '一', '二', '三', '四', '五', '六'];
+    let week = Arr[oDate.getDay()];
+    return `${year}年${month}月${day}日 星期${week}`;
+  };
+
   render() {
     const { children } = this.props;
     return (
@@ -124,8 +140,11 @@ class Index extends Component {
               <div className={styles['header-toolbar-wrapper']}>
                 <div>欢迎来到浙江公证网官方网站！</div>
                 <div>
-                  <div>2019年1月12日 星期三</div>
-                  <Button style={{ marginLeft: 20, borderColor: '#C72D29', color: '#C72D29' }} size='small'>登录</Button>
+                  <div>{this.getCurrDate()}</div>
+                  <Button style={{ marginLeft: 20, borderColor: '#C72D29', color: '#C72D29' }} size='small'
+                          onClick={() => {
+                            window.location.href = 'http://118.31.46.146:8080/a/login';
+                          }}>登录</Button>
                 </div>
               </div>
             </div>

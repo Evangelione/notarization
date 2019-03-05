@@ -17,3 +17,13 @@ export function postAdvisory(value) {
     body: formData,
   });
 }
+
+export function useful(id) {
+  let formData = new FormData();
+  formData.append('guestbookId', id);
+  return request(`http://118.31.46.146:8080/api/guestbook/zan`, {
+    method: 'POST',
+    credentials: 'omit',
+    body: formData,
+  });
+}
