@@ -39,8 +39,10 @@ class Index extends Component {
     return (
       <DynamicTitle>
         <List list={dynamicList} hasLine={5}/>
-        <Pagination showQuickJumper defaultCurrent={dynamicPage} total={dynamicTotal} onChange={this.pageChange}
-                    style={{ marginTop: 30, marginBottom: 5 }}/>
+        {dynamicTotal ?
+          <Pagination showQuickJumper defaultCurrent={dynamicPage} total={dynamicTotal} onChange={this.pageChange}
+                      style={{ marginTop: 30, marginBottom: 5 }}/> : null}
+
       </DynamicTitle>
     );
   }

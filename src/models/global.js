@@ -18,6 +18,12 @@ export default {
     middleBar: [],
     friendLink: [],
     outLink: [],
+    mainList: [],
+    officeList: [],
+    officeInfo: {
+      office: {},
+      users: [],
+    },
   },
 
   subscriptions: {
@@ -67,6 +73,7 @@ export default {
         data.data.unshift({
           name: '首页',
           path: '/',
+          childList: [],
         });
         yield put({
           type: 'save',
@@ -179,6 +186,43 @@ export default {
         :
         message.error(data.message);
     },
+    * fetchMainList({ payload }, { call, put }) {
+      const { data } = yield call(globalServices.fetchMainList);
+      parseInt(data.code, 10) === 1 ?
+        yield put({
+          type: 'save',
+          payload: {
+            mainList: data.data,
+          },
+        })
+        :
+        message.error(data.message);
+    },
+    * fetchOfficeList({ payload }, { call, put }) {
+      const { data } = yield call(globalServices.fetchOfficeList);
+      parseInt(data.code, 10) === 1 ?
+        yield put({
+          type: 'save',
+          payload: {
+            officeList: data.data,
+          },
+        })
+        :
+        message.error(data.message);
+    },
+    * fetchOfficeInfo({ payload: { id } }, { call, put }) {
+      const { data } = yield call(globalServices.fetchOfficeInfo, id);
+      parseInt(data.code, 10) === 1 ?
+        yield put({
+          type: 'save',
+          payload: {
+            officeInfo: data.data,
+          },
+        })
+        :
+        message.error(data.message);
+    },
+
   },
 
   reducers: {

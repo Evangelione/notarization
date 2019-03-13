@@ -18,6 +18,7 @@ class Index extends Component {
       '/reportDownload': `${module}`,
       '/searchPage': `${module}`,
       '/article': `${module}`,
+      '/notaryOffice/OfficeInfo': '公证机构详情'
     };
     const pathSnippets = location.pathname.split('/').filter(i => i);
     const extraBreadcrumbItems = pathSnippets.map((_, index) => {

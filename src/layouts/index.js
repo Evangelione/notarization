@@ -26,7 +26,7 @@ class Index extends Component {
   mapNavItem = () => {
     const { currentLink, currentPopover, navBar } = this.props.global;
     return navBar.map((value, index) => {
-      if (value.childList) {
+      if (value.childList && value.childList.length) {
         const content = (
           <div>
             {value.childList.map((value, index) => {
@@ -53,10 +53,10 @@ class Index extends Component {
       type: 'global/save',
       payload: {
         currentLink: index,
-        currentPopover: childList ? this.props.global.currentPopover : null,
+        currentPopover: childList.length ? this.props.global.currentPopover : null,
       },
     });
-    if (childList) return false;
+    if (childList.length) return false;
     if (name === '首页') {
       router.push({
         pathname: '/',

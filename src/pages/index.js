@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import CarouselMap from '@/components/CarouselMap/CarouselMap';
 import List from '@/components/List/index';
 import ListTitle from '@/components/ListTitle/index';
-import { list1, list2 } from '@/common/constants';
 import classnames from 'classnames';
 import styles from './index.less';
 import { connect } from 'dva';
@@ -91,6 +90,12 @@ class Index extends Component {
       type: 'global/fetchOutLink',
       payload: {},
     });
+
+    // 获取下面模块文章列表
+    this.props.dispatch({
+      type: 'global/fetchMainList',
+      payload: {},
+    });
   }
 
   changeBarLink = (curr, title) => {
@@ -117,12 +122,13 @@ class Index extends Component {
   };
 
   openWindow = (url) => {
-    window.location.href = url;
+    window.location.href = `https://${url}`;
   };
 
   render() {
     const { currList, currTitle } = this.state;
-    const { barLink, middleBar, friendLink, outLink } = this.props.global;
+    const { barLink, middleBar, friendLink, outLink, mainList } = this.props.global;
+    console.log(mainList);
     return (
       <div>
         <div className={styles['container']} style={{ padding: '18px 18px 8px' }}>
@@ -154,15 +160,18 @@ class Index extends Component {
             </div>;
           })}
         </div>
-        <div className={styles['container']} style={{ marginTop: 24, width: 658 }}>
-          <ListTitle title={'案例精选'} link={true}/>
-          <List list={list1} title={'案例精选'}/>
-        </div>
-        <div className={styles['container']} style={{ marginTop: 24, marginLeft: 24, width: 418 }}>
-          <ListTitle title={'理论园地'} link={true}/>
-          <List list={list1} title={'理论园地'}/>
-        </div>
-
+        {mainList.slice(0, 2).map((value, index) => {
+          return <div className={styles['container']} key={index}
+                      style={{
+                        marginTop: 24,
+                        marginLeft: index === 1 ? 24 : 0,
+                        width: index === 0 ? 658 : 418,
+                        minHeight: 212,
+                      }}>
+            <ListTitle title={value.category.name} link={true}/>
+            <List list={value.data.list} title={'案例精选'}/>
+          </div>;
+        })}
         <div className={classnames(styles['container'], styles['image-content'])}
              style={{ marginTop: 24, width: '100%' }}>
           {outLink.map((value, index) => {
@@ -172,6 +181,10 @@ class Index extends Component {
               <div>{value.title}</div>
             </div>;
           })}
+          {!outLink.length && <div style={{ marginLeft: 0 }}>
+            <img src={require('@/assets/images/006bYgeozy7pHERNHmg18&690.jpg')} alt=""/>
+            <div>敬请期待</div>
+          </div>}
           {/*<div style={{ marginLeft: 0 }}>*/}
           {/*<img src={require('@/assets/images/006bYgeozy7pHERNHmg18&690.jpg')} alt=""/>*/}
           {/*<div>浙江公证服务平台</div>*/}
@@ -185,21 +198,16 @@ class Index extends Component {
           {/*<div>敬请期待</div>*/}
           {/*</div>*/}
         </div>
+        {mainList.slice(2).map((value, index) => {
+          return <div className={styles['container']} key={index}
+                      style={{ marginTop: 24, marginLeft: index === 0 ? 0 : 24, width: 350, minHeight: 212 }}>
+            <ListTitle title={value.category.name} link={true}/>
+            <List list={value.data.list} title={'案例精选'}/>
+          </div>;
+        })}
 
-        <div className={styles['container']} style={{ marginTop: 24, width: 351 }}>
-          <ListTitle title={'网络培训'} link={true}/>
-          <List list={list2} title={'网络培训'}/>
-        </div>
-        <div className={styles['container']} style={{ marginTop: 24, marginLeft: 24, width: 351 }}>
-          <ListTitle title={'法律法规'} link={true}/>
-          <List list={list2} title={'法律法规'}/>
-        </div>
-        <div className={styles['container']} style={{ marginTop: 24, marginLeft: 24, width: 350 }}>
-          <ListTitle title={'公证期刊'} link={true}/>
-          <List list={list2} title={'公证期刊'}/>
-        </div>
-
-        <div className={styles['container']} style={{ marginTop: 12, marginBottom: 24, width: 538, height: 160 }}>
+        <div className={styles['container']}
+             style={{ marginTop: 24, marginBottom: 24, width: 538, verticalAlign: 'top' }}>
           <ListTitle title={'友情链接'} link={false}/>
           <div style={{ paddingTop: 14 }}>
             {friendLink.map((value, index) => {

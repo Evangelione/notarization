@@ -95,3 +95,24 @@ export function fetchOutLink() {
     credentials: 'omit',
   });
 }
+
+export function fetchMainList() {
+  return request(`http://118.31.46.146:8080/api/mainList`, {
+    method: 'GET',
+    credentials: 'omit',
+  });
+}
+
+export function fetchOfficeList() {
+  return request(`http://118.31.46.146:8080/api/office/list`, {
+    method: 'GET',
+    credentials: 'omit',
+  });
+}
+
+export function fetchOfficeInfo(id) {
+  return request(`http://118.31.46.146:8080/api/office?officeId=${id}`, {
+    method: 'GET',
+    credentials: 'omit',
+  });
+}

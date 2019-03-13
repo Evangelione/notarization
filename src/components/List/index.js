@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Empty } from 'antd';
 import styles from './index.less';
 import router from 'umi/router';
 import withRouter from 'umi/withRouter';
@@ -32,9 +33,10 @@ class Index extends Component {
           }
           return <div key={index} className={styles['list-item']} onClick={this.goArticle.bind(null, value.id)}>
             <div>{value.title}</div>
-            <div>[{value.updateDate.substr(0,10)}]</div>
+            <div>[{value.updateDate.substr(0, 10)}]</div>
           </div>;
         })}
+        {!list.length && <Empty style={{marginTop: 10}}/>}
       </div>
     );
   }
