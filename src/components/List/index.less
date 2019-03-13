@@ -12,6 +12,10 @@
 
   & > div:nth-child(1) {
     padding-left: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 310px;
   }
 
   & > div:nth-child(1):before {
@@ -27,12 +31,15 @@
 
   & > div:nth-child(2) {
     color: @font-color-light;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
 }
 
 .list-item:hover {
-  color: @primary-red
+  color: @primary-red;
 }
 
 .dashed-line {

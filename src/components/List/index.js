@@ -32,7 +32,7 @@ class Index extends Component {
           }
           return <div key={index} className={styles['list-item']} onClick={this.goArticle.bind(null, value.id)}>
             <div>{value.title}</div>
-            <div>[{value.updateDate}]</div>
+            <div>[{value.updateDate.substr(0,10)}]</div>
           </div>;
         })}
       </div>

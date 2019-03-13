@@ -46,16 +46,16 @@ class Index extends Component {
             <div>发表时间：{article.createDate}</div>
             <div>来源：{article.user && article.user.name}</div>
           </div>
-          <div className={styles['content']}>
-            <p>{article.articleData && article.articleData.content}</p>
-          </div>
+          <div className={styles['content']}
+               dangerouslySetInnerHTML={{ __html: article.articleData && article.articleData.content }}/>
           <div>
             <div className={styles['list-title']}>相关内容</div>
             <List itemLayout="horizontal"
                   dataSource={article.relationList}
                   renderItem={item => {
                     return <List.Item onClick={this.goArticle.bind(null, item[1])}>
-                      <List.Item.Meta title={<div className={listStyles['list-item']} style={{ paddingLeft: 18 }}>{item[2]}</div>}/>
+                      <List.Item.Meta
+                        title={<div className={listStyles['list-item']} style={{ paddingLeft: 18 }}>{item[2]}</div>}/>
                       <div>{item[3]}</div>
                     </List.Item>;
                   }}/>
