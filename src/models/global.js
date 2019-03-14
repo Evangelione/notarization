@@ -6,7 +6,6 @@ export default {
   namespace: 'global',
   state: {
     currentLink: 0,
-    currentPopover: '',
     barLink: 'work',
     navBar: [],
     article: {},

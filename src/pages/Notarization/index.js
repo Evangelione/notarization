@@ -7,36 +7,39 @@ import { connect } from 'dva';
 
 const columns = [{
   title: '寄出日期',
-  dataIndex: 'time',
-  key: 'time',
+  dataIndex: 'jsDate',
+  key: 'jsDate',
 }, {
   title: '姓名',
   dataIndex: 'name',
   key: 'name',
 }, {
   title: '公证书编号',
-  dataIndex: 'code',
-  key: 'code',
+  dataIndex: 'bh',
+  key: 'bh',
 }, {
   title: '年度',
   key: 'year',
   dataIndex: 'year',
 }, {
   title: '公证处',
-  key: 'office',
-  dataIndex: 'office',
+  key: 'company',
+  dataIndex: 'company',
+  render: (text, record) => {
+    return record.company.name;
+  },
 }, {
   title: '公证人',
-  key: 'man',
-  dataIndex: 'man',
+  key: 'gzUser',
+  dataIndex: 'gzUser',
 }, {
   title: '公证项目',
-  key: 'project',
-  dataIndex: 'project',
+  key: 'leibie',
+  dataIndex: 'leibie',
 }, {
   title: '递送方式',
-  key: 'type',
-  dataIndex: 'type',
+  key: 'jsWay',
+  dataIndex: 'jsWay',
 }, {
   title: '备注',
   key: 'remarks',

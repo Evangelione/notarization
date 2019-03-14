@@ -3,11 +3,16 @@ import { Breadcrumb } from 'antd';
 import withRouter from 'umi/withRouter';
 import Link from 'umi/link';
 import styles from './index.less';
+import { connect } from 'dva';
 
+@connect(({ global }) => ({
+  global,
+}))
 class Index extends Component {
   render() {
     const { location, children } = this.props;
     const { module } = location.query;
+    console.log(module);
     const breadcrumbNameMap = {
       '/dynamicList': `${module}`,
       '/notarization': `${module}`,
@@ -18,7 +23,7 @@ class Index extends Component {
       '/reportDownload': `${module}`,
       '/searchPage': `${module}`,
       '/article': `${module}`,
-      '/notaryOffice/OfficeInfo': '公证机构详情'
+      '/notaryOffice/OfficeInfo': '公证机构详情',
     };
     const pathSnippets = location.pathname.split('/').filter(i => i);
     const extraBreadcrumbItems = pathSnippets.map((_, index) => {
@@ -33,7 +38,7 @@ class Index extends Component {
     });
     const breadcrumbItems = [(
       <Breadcrumb.Item key="home">
-        <Link to="/">首页</Link>
+        <Link to={`/?module=首页`}>首页</Link>
       </Breadcrumb.Item>
     )].concat(extraBreadcrumbItems);
     return (

@@ -122,13 +122,12 @@ class Index extends Component {
   };
 
   openWindow = (url) => {
-    window.location.href = `https://${url}`;
+    window.location.href = `http://${url}`;
   };
 
   render() {
     const { currList, currTitle } = this.state;
     const { barLink, middleBar, friendLink, outLink, mainList } = this.props.global;
-    console.log(mainList);
     return (
       <div>
         <div className={styles['container']} style={{ padding: '18px 18px 8px' }}>
@@ -168,7 +167,7 @@ class Index extends Component {
                         width: index === 0 ? 658 : 418,
                         minHeight: 212,
                       }}>
-            <ListTitle title={value.category.name} link={true}/>
+            <ListTitle title={value.category.name} link={true} id={value.category.id}/>
             <List list={value.data.list} title={'案例精选'}/>
           </div>;
         })}
@@ -201,7 +200,7 @@ class Index extends Component {
         {mainList.slice(2).map((value, index) => {
           return <div className={styles['container']} key={index}
                       style={{ marginTop: 24, marginLeft: index === 0 ? 0 : 24, width: 350, minHeight: 212 }}>
-            <ListTitle title={value.category.name} link={true}/>
+            <ListTitle title={value.category.name} link={true} id={value.category.id}/>
             <List list={value.data.list} title={'案例精选'}/>
           </div>;
         })}

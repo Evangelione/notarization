@@ -24,14 +24,15 @@ class Index extends Component {
   }
 
   mapNavItem = () => {
-    const { currentLink, currentPopover, navBar } = this.props.global;
+    const { module } = this.props.location.query;
+    const { currentLink, navBar } = this.props.global;
     return navBar.map((value, index) => {
       if (value.childList && value.childList.length) {
         const content = (
           <div>
             {value.childList.map((value, index) => {
               return <div key={index}
-                          className={currentPopover === index ? classnames(styles['popoverItem'], styles['popoverItem-active']) : styles['popoverItem']}
+                          className={module === value.name ? classnames(styles['popoverItem'], styles['popoverItem-active']) : styles['popoverItem']}
                           onClick={this.popoverClick.bind(null, index, value.name, value.href, value.id)}>{value.name}</div>;
             })}
           </div>
@@ -43,7 +44,7 @@ class Index extends Component {
           </div>
         </Popover>;
       }
-      return <div key={index} className={currentLink === index ? styles['nav-item-active'] : ''}
+      return <div key={index} className={module === value.name ? styles['nav-item-active'] : ''}
                   onClick={this.linkClick.bind(null, index, value.name, value.href, value.id, value.childList)}>{value.name}</div>;
     });
   };
@@ -53,7 +54,6 @@ class Index extends Component {
       type: 'global/save',
       payload: {
         currentLink: index,
-        currentPopover: childList.length ? this.props.global.currentPopover : null,
       },
     });
     if (childList.length) return false;
@@ -82,12 +82,7 @@ class Index extends Component {
   };
 
   popoverClick = (index, name, path, id) => {
-    this.props.dispatch({
-      type: 'global/save',
-      payload: {
-        currentPopover: index,
-      },
-    });
+
     path === '/dynamicList' && this.props.dispatch({
       type: 'global/fetchDynamicList',
       payload: {

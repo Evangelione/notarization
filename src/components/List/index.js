@@ -8,7 +8,13 @@ class Index extends Component {
 
   goArticle = (id) => {
     const { module } = this.props.location.query;
-    router.push({
+    module === '报表下载' ? router.push({
+      pathname: '/reportDownload',
+      query: {
+        module: this.props.title ? this.props.title : module,
+        articleId: id,
+      },
+    }) : router.push({
       pathname: '/article',
       query: {
         module: this.props.title ? this.props.title : module,
@@ -36,7 +42,7 @@ class Index extends Component {
             <div>[{value.updateDate.substr(0, 10)}]</div>
           </div>;
         })}
-        {!list.length && <Empty style={{marginTop: 10}}/>}
+        {!list.length && <Empty style={{ marginTop: 10 }}/>}
       </div>
     );
   }

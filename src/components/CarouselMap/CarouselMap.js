@@ -31,7 +31,6 @@ class CarouselMap extends Component {
 
   render() {
     const { carouselMap } = this.props.global;
-    console.log(carouselMap)
     return (
       <Carousel afterChange={this.onChange} autoplay style={{ display: 'inline-block' }} className={styles['carousel']}>
         {carouselMap.map((value, index) => (

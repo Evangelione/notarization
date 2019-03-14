@@ -2,51 +2,81 @@ import React, { Component } from 'react';
 import { Button, List } from 'antd';
 import DynamicTitle from '../../components/DynamicTitle/index';
 import styles from './index.less';
+import { connect } from 'dva';
+import listStyles from '@/components/List/index.less';
+import router from 'umi/router';
 
 
-const data = [{
-  title: '全国首家互联网公证处在杭州揭牌',
-  time: '2018-12-05',
-}, {
-  title: '全国首家互联网公证处在杭州揭牌',
-  time: '2018-12-05',
-}, {
-  title: '全国首家互联网公证处在杭州揭牌',
-  time: '2018-12-05',
-}, {
-  title: '全国首家互联网公证处在杭州揭牌',
-  time: '2018-12-05',
-}];
+// const data = [{
+//   title: '全国首家互联网公证处在杭州揭牌',
+//   time: '2018-12-05',
+// }, {
+//   title: '全国首家互联网公证处在杭州揭牌',
+//   time: '2018-12-05',
+// }, {
+//   title: '全国首家互联网公证处在杭州揭牌',
+//   time: '2018-12-05',
+// }, {
+//   title: '全国首家互联网公证处在杭州揭牌',
+//   time: '2018-12-05',
+// }];
 
+@connect(({ global }) => ({
+  global,
+}))
 class Index extends Component {
+  componentWillMount() {
+    const { articleId } = this.props.location.query;
+    this.props.dispatch({
+      type: 'global/fetchArticle',
+      payload: {
+        id: articleId,
+      },
+    });
+  }
+
+  goArticle = (id) => {
+    router.replace({
+      pathname: '/article',
+      query: {
+        module: '相关内容',
+        articleId: id,
+      },
+    });
+    this.props.dispatch({
+      type: 'global/fetchArticle',
+      payload: {
+        id,
+      },
+    });
+  };
+
   render() {
+    const { article } = this.props.global;
     return (
       <DynamicTitle>
         <div style={{ textAlign: 'right' }}>
           <Button type='primary' icon='cloud-download'>下载本篇附件</Button>
         </div>
         <div style={{ padding: '0 134px' }}>
-          <div className={styles['title']}>公证员一般任职上报材料目录</div>
+          <div className={styles['title']}>{article.title}</div>
           <div className={styles['desc']}>
-            <div>发表时间：2018-12-26 18:32</div>
-            <div>来源：浙江公证网</div>
+            <div>发表时间：{article.createDate}</div>
+            <div>来源：{article.user && article.user.name}</div>
           </div>
-          <div className={styles['content']}>
-            <p>2月26日-27日，浙江省公证协会信息化建设委员会第二次全体会议在杭州召开。省公证协会会长吕昭华出席会议并讲话，省协会秘书长葛建强主持会议。</p>
-            <p>会议学习传达了全国公证行业信息化工作推进会会议精神和《“数字法治、智慧司法”信息化体系建设实施方案》，针对《全国公证行业信息化建设工作推进方案》的内容，就我省公证信息化建设的现状和存在的问题进行了深入探讨。</p>
-          </div>
+          <div className={styles['content']}
+               dangerouslySetInnerHTML={{ __html: article.articleData && article.articleData.content }}/>
           <div>
             <div className={styles['list-title']}>相关内容</div>
             <List itemLayout="horizontal"
-                  dataSource={data}
-                  renderItem={item => (
-                    <List.Item>
+                  dataSource={article.relationList}
+                  renderItem={item => {
+                    return <List.Item onClick={this.goArticle.bind(null, item[1])}>
                       <List.Item.Meta
-                        title={<a href="https://ant.design" style={{ paddingLeft: 18 }}>{item.title}</a>}
-                      />
-                      <div>{item.time}</div>
-                    </List.Item>
-                  )}/>
+                        title={<div className={listStyles['list-item']} style={{ paddingLeft: 18 }}>{item[2]}</div>}/>
+                      <div>{item[3]}</div>
+                    </List.Item>;
+                  }}/>
           </div>
         </div>
       </DynamicTitle>

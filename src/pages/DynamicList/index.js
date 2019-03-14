@@ -10,6 +10,22 @@ import List from '@/components/List/index';
   global,
 }))
 class Index extends Component {
+
+  componentDidMount() {
+    this.props.location.query.find_str ?
+      this.props.dispatch({
+        type: 'global/searchList',
+        payload: {
+          keyword: this.props.location.query.find_str,
+        },
+      }) : this.props.dispatch({
+        type: 'global/fetchDynamicList',
+        payload: {
+          id: this.props.location.query.id,
+        },
+      });
+  }
+
   fetchDynamicList = (page) => {
     this.props.dispatch({
       type: 'global/fetchDynamicList',
