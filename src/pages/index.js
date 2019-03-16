@@ -168,7 +168,7 @@ class Index extends Component {
                         minHeight: 212,
                       }}>
             <ListTitle title={value.category.name} link={true} id={value.category.id}/>
-            <List list={value.data.list} title={'案例精选'}/>
+            <List list={value.data.list} title={value.category.name}/>
           </div>;
         })}
         <div className={classnames(styles['container'], styles['image-content'])}
@@ -201,7 +201,7 @@ class Index extends Component {
           return <div className={styles['container']} key={index}
                       style={{ marginTop: 24, marginLeft: index === 0 ? 0 : 24, width: 350, minHeight: 212 }}>
             <ListTitle title={value.category.name} link={true} id={value.category.id}/>
-            <List list={value.data.list} title={'案例精选'}/>
+            <List list={value.data.list} title={value.category.name}/>
           </div>;
         })}
 

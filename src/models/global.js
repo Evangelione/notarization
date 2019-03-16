@@ -23,6 +23,7 @@ export default {
       office: {},
       users: [],
     },
+    qkImages: [],
   },
 
   subscriptions: {
@@ -222,6 +223,18 @@ export default {
         message.error(data.message);
     },
 
+    * fetchQK({ payload: { articleId } }, { call, put }) {
+      const { data } = yield call(globalServices.fetchQK, articleId);
+      parseInt(data.code, 10) === 1 ?
+        yield put({
+          type: 'save',
+          payload: {
+            qkImages: data.data.images,
+          },
+        })
+        :
+        message.error(data.message);
+    },
   },
 
   reducers: {

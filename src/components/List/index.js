@@ -7,9 +7,26 @@ import withRouter from 'umi/withRouter';
 class Index extends Component {
 
   goArticle = (id) => {
+    const { title } = this.props;
+    if (title === '公证期刊') {
+      router.push({
+        pathname: '/pageFlip',
+        query: {
+          module: this.props.title,
+          articleId: id,
+        },
+      });
+      return false;
+    }
     const { module } = this.props.location.query;
     module === '报表下载' ? router.push({
       pathname: '/reportDownload',
+      query: {
+        module: this.props.title ? this.props.title : module,
+        articleId: id,
+      },
+    }) : module === '公证期刊' ? router.push({
+      pathname: '/pageFlip',
       query: {
         module: this.props.title ? this.props.title : module,
         articleId: id,

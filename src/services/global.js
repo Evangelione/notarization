@@ -116,3 +116,10 @@ export function fetchOfficeInfo(id) {
     credentials: 'omit',
   });
 }
+
+export function fetchQK(articleId) {
+  return request(`http://118.31.46.146:8080/api/journal/article?articleId=${articleId}`, {
+    method: 'GET',
+    credentials: 'omit',
+  });
+}
