@@ -15,7 +15,7 @@ export function fetchSD(year, bh, office) {
 }
 
 export function fetchNotarizationList() {
-  return request(`http://118.31.46.146:8080/api/office/list`, {
+  return request(`http://118.31.46.146:8080/api/office/list/select`, {
     method: 'GET',
     credentials: 'omit',
   });

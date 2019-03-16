@@ -51,12 +51,28 @@ class Index extends Component {
     });
   };
 
+  downLoadFile = (fileStr) => {
+    let fileArr = fileStr.split('|');
+    console.log(fileArr);
+    fileArr.map((value => {
+      if (value === '') return false;
+      let aLink = document.createElement('a');
+      aLink.download = '';
+      aLink.href = value;
+      document.body.appendChild(aLink);
+      aLink.click();
+      document.body.removeChild(aLink);
+      return true;
+    }));
+  };
+
   render() {
     const { article } = this.props.global;
     return (
       <DynamicTitle>
         <div style={{ textAlign: 'right' }}>
-          <Button type='primary' icon='cloud-download'>下载本篇附件</Button>
+          <Button type='primary' icon='cloud-download'
+                  onClick={this.downLoadFile.bind(null, article.files)}>下载本篇附件</Button>
         </div>
         <div style={{ padding: '0 134px' }}>
           <div className={styles['title']}>{article.title}</div>

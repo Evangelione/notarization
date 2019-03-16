@@ -1,56 +1,3 @@
-@import "./common/theme";
-
-html, body, #root {
-  min-width: 1100px;
-  height: 100%;
-  color: @font-color;
-  background-color: @background-gray;
-}
-
-body {
-  margin: 0;
-}
-
-.search-input {
-  & > input {
-    border-color: @primary-red;
-  }
-}
-
-.ant-carousel {
-  height: 360px;
-  display: inline-block;
-}
-
-.ant-popover-inner-content {
-  padding: 0 !important;
-}
-
-.ant-popover-placement-bottom > .ant-popover-content > .ant-popover-arrow, .ant-popover-placement-bottomLeft > .ant-popover-content > .ant-popover-arrow, .ant-popover-placement-bottomRight > .ant-popover-content > .ant-popover-arrow {
-  border-top-color: @primary-red !important;
-  border-left-color: @primary-red !important;
-}
-
-
-.ant-form-item-label label {
-  color: @font-color-deep !important;
-}
-
-.ant-form-item {
-  margin-bottom: 10px !important;
-}
-
-.spanHover:hover {
-  color: @primary-red;
-  cursor: pointer;
-}
-
-.ant-carousel .slick-dots {
-  bottom: 14px !important;
-  text-align: right !important;
-  padding-right: 15px !important;
-}
-
 #page-flip {
   width: 100%;
   display: inline-block;
@@ -72,10 +19,10 @@ body {
 .page-left, .page-right {
   position: absolute;
   width: 50%;
-  height: 100%;
+  height: 86%;
   background-color: transparent;
   background-repeat: no-repeat;
-  background-size: 550px;
+  background-size: cover;
 }
 
 .page-left {
@@ -134,10 +81,10 @@ body {
 .disable-click {
   position: absolute;
   width: 50%;
-  height: 100%;
+  height: 86%;
   background-color: transparent;
   background-repeat: no-repeat;
-  background-size: 550px;
+  background-size: cover;
 }
 
 .disable-click .page-middle {
@@ -200,11 +147,11 @@ body {
 
 .next-page, .prev-page {
   position: absolute;
-  height: 100%;
+  height: 86%;
   width: 0%;
   background-color: transparent;
   background-repeat: no-repeat;
-  background-size:  550px;
+  background-size: cover;
 }
 
 .next-page {
@@ -256,7 +203,7 @@ body {
 
 .turning-left, .turning-right {
   position: absolute;
-  height: 100%;
+  height: 86%;
   width: 0%;
   z-index: 2;
 }
@@ -275,10 +222,10 @@ body {
   z-index: 1;
   position: absolute;
   width: 0%;
-  height: 100%;
+  height: 86%;
   background-color: transparent;
   background-repeat: no-repeat;
-  background-size:  550px;
+  background-size: cover;
 }
 
 .hidden-left-page {
