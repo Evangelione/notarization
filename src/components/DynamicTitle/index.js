@@ -24,6 +24,7 @@ class Index extends Component {
       '/searchPage': `${module}`,
       '/article': `${module}`,
       '/notaryOffice/OfficeInfo': '公证机构详情',
+      '/pageFlip': `${module}`,
     };
     const pathSnippets = location.pathname.split('/').filter(i => i);
     const extraBreadcrumbItems = pathSnippets.map((_, index) => {

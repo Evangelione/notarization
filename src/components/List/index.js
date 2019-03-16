@@ -6,7 +6,7 @@ import withRouter from 'umi/withRouter';
 
 class Index extends Component {
 
-  goArticle = (id) => {
+  goArticle = (id, value) => {
     const { title } = this.props;
     if (title === '公证期刊') {
       router.push({
@@ -14,6 +14,9 @@ class Index extends Component {
         query: {
           module: this.props.title,
           articleId: id,
+          title: value.title,
+          createDate: value.createDate,
+          userName: value.user ? value.user.name : '暂无',
         },
       });
       return false;
@@ -30,6 +33,9 @@ class Index extends Component {
       query: {
         module: this.props.title ? this.props.title : module,
         articleId: id,
+        title: value.title,
+        createDate: value.createDate,
+        userName: value.user ? value.user.name : '暂无',
       },
     }) : router.push({
       pathname: '/article',
@@ -46,7 +52,7 @@ class Index extends Component {
       <div style={{ display: 'inline-block', width: '100%' }}>
         {list && list.map((value, index) => {
           if (!!index && (index + 1) % hasLine === 0) {
-            return <div key={index} onClick={this.goArticle.bind(null, value.id)}>
+            return <div key={index} onClick={this.goArticle.bind(null, value.id, value)}>
               <div className={styles['list-item']}>
                 <div>{value.title}</div>
                 <div>[{value.updateDate}]</div>
@@ -54,7 +60,8 @@ class Index extends Component {
               <div className={styles['dashed-line']}/>
             </div>;
           }
-          return <div key={index} className={styles['list-item']} onClick={this.goArticle.bind(null, value.id)}>
+          return <div key={index} className={styles['list-item']}
+                      onClick={this.goArticle.bind(null, value.id, value)}>
             <div>{value.title}</div>
             <div>[{value.updateDate.substr(0, 10)}]</div>
           </div>;
