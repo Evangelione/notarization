@@ -48,6 +48,10 @@ class Index extends Component {
           </div>
           <div className={styles['content']}
                dangerouslySetInnerHTML={{ __html: article.articleData && article.articleData.content }}/>
+          <div className={styles['next-before']}>
+            <div>上一篇：Vergil</div>
+            <div>下一篇：Dante</div>
+          </div>
           <div>
             <div className={styles['list-title']}>相关内容</div>
             <List itemLayout="horizontal"

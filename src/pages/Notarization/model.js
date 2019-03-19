@@ -7,6 +7,7 @@ export default {
   state: {
     searchList: [],
     notarizationList: [],
+    searchColumns: 'col1',
   },
 
   subscriptions: {

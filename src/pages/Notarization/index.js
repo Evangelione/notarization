@@ -6,6 +6,10 @@ import styles from './index.less';
 import { connect } from 'dva';
 
 const columns = [{
+  title: '函号',
+  dataIndex: 'hh',
+  key: 'hh',
+}, {
   title: '寄出日期',
   dataIndex: 'jsDate',
   key: 'jsDate',
@@ -14,13 +18,9 @@ const columns = [{
   dataIndex: 'name',
   key: 'name',
 }, {
-  title: '公证书编号',
-  dataIndex: 'bh',
-  key: 'bh',
-}, {
-  title: '年度',
-  key: 'year',
-  dataIndex: 'year',
+  title: '公证员',
+  key: 'gzUser',
+  dataIndex: 'gzUser',
 }, {
   title: '公证处',
   key: 'company',
@@ -29,22 +29,68 @@ const columns = [{
     return record.company.name;
   },
 }, {
-  title: '公证人',
-  key: 'gzUser',
-  dataIndex: 'gzUser',
+  title: '编号',
+  dataIndex: 'bh',
+  key: 'bh',
 }, {
-  title: '公证项目',
+  title: '公证日期',
+  key: 'year',
+  dataIndex: 'year',
+}, {
+  title: '类别',
   key: 'leibie',
   dataIndex: 'leibie',
 }, {
-  title: '递送方式',
+  title: '水印号',
+  key: 'syh',
+  dataIndex: 'syh',
+}, {
+  title: '寄送方式',
   key: 'jsWay',
   dataIndex: 'jsWay',
 }, {
-  title: '备注',
-  key: 'remarks',
-  dataIndex: 'remarks',
+  title: '页数',
+  key: 'ys',
+  dataIndex: 'ys',
 }];
+
+const columns2 = [{
+  title: '函号',
+  dataIndex: 'hh',
+  key: 'hh',
+}, {
+  title: '寄送日期',
+  dataIndex: 'jsDate',
+  key: 'jsDate',
+}, {
+  title: '公证处',
+  key: 'company',
+  dataIndex: 'company',
+  render: (text, record) => {
+    return record.company.name;
+  },
+}, {
+  title: '姓名',
+  dataIndex: 'name',
+  key: 'name',
+}, {
+  title: '类别',
+  key: 'leibie',
+  dataIndex: 'leibie',
+}, {
+  title: '公证书编号',
+  dataIndex: 'bh',
+  key: 'bh',
+}, {
+  title: '出证日期',
+  key: 'year',
+  dataIndex: 'year',
+}, {
+  title: '编号',
+  key: 'bh2',
+  dataIndex: 'bh2',
+}];
+
 
 // const data = [{
 //   key: '1',
@@ -93,7 +139,7 @@ class Index extends Component {
   }
 
   render() {
-    const { searchList, notarizationList } = this.props.notarization;
+    const { searchList, notarizationList, searchColumns } = this.props.notarization;
     return (
       <DynamicTitle>
         <div className={styles['search-box']}>
@@ -111,7 +157,8 @@ class Index extends Component {
           </div>
         </div>
         <div style={{ borderTop: '1px solid #9b9b9b' }}>
-          <Table dataSource={searchList} columns={columns}/>
+          <Table dataSource={searchList} columns={searchColumns === 'col1' ? columns : columns2}/>
+
         </div>
       </DynamicTitle>
     );

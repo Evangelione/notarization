@@ -29,6 +29,12 @@ class SearchForm extends Component {
           office: field,
         },
       });
+      this.props.dispatch({
+        type: 'notarization/save',
+        payload: {
+          searchColumns: this.props.type === 'js' ? 'col1' : 'col2',
+        },
+      });
     }
   };
 
