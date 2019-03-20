@@ -36,6 +36,40 @@ class Index extends Component {
     });
   };
 
+  preArt = (id) => {
+    const { module } = this.props.location.query;
+    router.replace({
+      pathname: '/article',
+      query: {
+        module: module,
+        articleId: id,
+      },
+    });
+    this.props.dispatch({
+      type: 'global/fetchArticle',
+      payload: {
+        id,
+      },
+    });
+  };
+
+  afterArt = (id) => {
+    const { module } = this.props.location.query;
+    router.replace({
+      pathname: '/article',
+      query: {
+        module: module,
+        articleId: id,
+      },
+    });
+    this.props.dispatch({
+      type: 'global/fetchArticle',
+      payload: {
+        id,
+      },
+    });
+  };
+
   render() {
     const { article } = this.props.global;
     return (
@@ -49,8 +83,18 @@ class Index extends Component {
           <div className={styles['content']}
                dangerouslySetInnerHTML={{ __html: article.articleData && article.articleData.content }}/>
           <div className={styles['next-before']}>
-            <div>上一篇：Vergil</div>
-            <div>下一篇：Dante</div>
+            <div onClick={this.preArt.bind(null, article.pre && article.pre.id)} style={{
+              width: 300,
+              textOverflow: 'ellipsis',
+              overflow: 'hidden',
+              whiteSpace: 'nowrap',
+            }} title={article.pre ? article.pre.title : ''}>上一篇：{article.pre ? article.pre.title : '无'}</div>
+            <div onClick={this.afterArt.bind(null, article.after && article.after.id)} style={{
+              width: 300,
+              textOverflow: 'ellipsis',
+              overflow: 'hidden',
+              whiteSpace: 'nowrap',
+            }} title={article.after ? article.after.title : ''}>下一篇：{article.after ? article.after.title : '无'}</div>
           </div>
           <div>
             <div className={styles['list-title']}>相关内容</div>

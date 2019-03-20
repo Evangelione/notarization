@@ -7,8 +7,8 @@ import { connect } from 'dva';
 
 const columns = [{
   title: '函号',
-  dataIndex: 'hh',
-  key: 'hh',
+  dataIndex: 'hanhao',
+  key: 'hanhao',
 }, {
   title: '寄出日期',
   dataIndex: 'jsDate',
@@ -42,26 +42,26 @@ const columns = [{
   dataIndex: 'leibie',
 }, {
   title: '水印号',
-  key: 'syh',
-  dataIndex: 'syh',
+  key: 'watermark',
+  dataIndex: 'watermark',
 }, {
   title: '寄送方式',
   key: 'jsWay',
   dataIndex: 'jsWay',
 }, {
   title: '页数',
-  key: 'ys',
-  dataIndex: 'ys',
+  key: 'pagination',
+  dataIndex: 'pagination',
 }];
 
 const columns2 = [{
   title: '函号',
-  dataIndex: 'hh',
-  key: 'hh',
+  dataIndex: 'hanhao',
+  key: 'hanhao',
 }, {
   title: '寄送日期',
-  dataIndex: 'jsDate',
-  key: 'jsDate',
+  dataIndex: 'sdDate',
+  key: 'sdDate',
 }, {
   title: '公证处',
   key: 'company',
@@ -87,8 +87,8 @@ const columns2 = [{
   dataIndex: 'year',
 }, {
   title: '编号',
-  key: 'bh2',
-  dataIndex: 'bh2',
+  key: 'no',
+  dataIndex: 'no',
 }];
 
 

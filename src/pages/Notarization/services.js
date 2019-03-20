@@ -9,7 +9,7 @@ export function fetchJS(year, bh, office) {
 
 export function fetchSD(year, bh, office) {
   return request(`http://118.31.46.146:8080/api/gzssd?year=${year}&bh=${bh}&office=${office}`, {
-    method: 'POST',
+    method: 'GET',
     credentials: 'omit',
   });
 }
