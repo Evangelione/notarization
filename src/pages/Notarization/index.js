@@ -34,8 +34,8 @@ const columns = [{
   key: 'bh',
 }, {
   title: '公证日期',
-  key: 'year',
-  dataIndex: 'year',
+  key: 'gzDate',
+  dataIndex: 'gzDate',
 }, {
   title: '类别',
   key: 'leibie',
@@ -83,8 +83,8 @@ const columns2 = [{
   key: 'bh',
 }, {
   title: '出证日期',
-  key: 'year',
-  dataIndex: 'year',
+  key: 'gzDate',
+  dataIndex: 'gzDate',
 }, {
   title: '编号',
   key: 'no',

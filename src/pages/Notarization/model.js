@@ -30,12 +30,17 @@ export default {
         :
         message.error(data.message);
     },
-    * fetchSD({ payload: { year, bh, office } }, { call }) {
-      yield call(notarizationServices.fetchSD, year, bh, office);
-      // parseInt(data.code, 10) === 1 ?
-      //   message.success(data.message)
-      //   :
-      //   message.error(data.message);
+    * fetchSD({ payload: { year, bh, office } }, { call, put }) {
+      const { data } = yield call(notarizationServices.fetchSD, year, bh, office);
+      parseInt(data.code, 10) === 1 ?
+        yield put({
+          type: 'save',
+          payload: {
+            searchList: data.data.list,
+          },
+        })
+        :
+        message.error(data.message);
     },
     * fetchNotarizationList({ payload }, { call, put }) {
       const { data } = yield call(notarizationServices.fetchNotarizationList);
