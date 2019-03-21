@@ -25,7 +25,7 @@ class OfficeInfo extends Component {
         <div style={{ padding: '0 134px' }}>
           <div className={styles['title']}>{officeInfo.office.name}</div>
           <div className={styles['desc']} style={{ height: 5 }}/>
-          <div>执业证号：{officeInfo.office.code}</div>
+          <div>执业证号：{officeInfo.office.cardNumber}</div>
           <div>负责人： {officeInfo.office.master || '暂无'}</div>
           <div>电话： {officeInfo.office.phone || '暂无'}</div>
           <div>传真： {officeInfo.office.fax || '暂无'}</div>
