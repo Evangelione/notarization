@@ -8,6 +8,7 @@ export default {
     searchList: [],
     notarizationList: [],
     searchColumns: 'col1',
+    areaList: [],
   },
 
   subscriptions: {
@@ -18,8 +19,8 @@ export default {
   },
 
   effects: {
-    * fetchJS({ payload: { year, bh, office } }, { call, put }) {
-      const { data } = yield call(notarizationServices.fetchJS, year, bh, office);
+    * fetchJS({ payload: { year, bh, office, area } }, { call, put }) {
+      const { data } = yield call(notarizationServices.fetchJS, year, bh, office, area);
       parseInt(data.code, 10) === 1 ?
         yield put({
           type: 'save',
@@ -30,8 +31,8 @@ export default {
         :
         message.error(data.message);
     },
-    * fetchSD({ payload: { year, bh, office } }, { call, put }) {
-      const { data } = yield call(notarizationServices.fetchSD, year, bh, office);
+    * fetchSD({ payload: { year, bh, office, area } }, { call, put }) {
+      const { data } = yield call(notarizationServices.fetchSD, year, bh, office, area);
       parseInt(data.code, 10) === 1 ?
         yield put({
           type: 'save',
@@ -42,13 +43,25 @@ export default {
         :
         message.error(data.message);
     },
-    * fetchNotarizationList({ payload }, { call, put }) {
-      const { data } = yield call(notarizationServices.fetchNotarizationList);
+    * fetchNotarizationList({ payload: { area } }, { call, put }) {
+      const { data } = yield call(notarizationServices.fetchNotarizationList2, area);
       parseInt(data.code, 10) === 1 ?
         yield put({
           type: 'save',
           payload: {
             notarizationList: data.data,
+          },
+        })
+        :
+        message.error(data.message);
+    },
+    * fetchAreaList({ payload }, { call, put }) {
+      const { data } = yield call(notarizationServices.fetchAreaList);
+      parseInt(data.code, 10) === 1 ?
+        yield put({
+          type: 'save',
+          payload: {
+            areaList: data.data,
           },
         })
         :

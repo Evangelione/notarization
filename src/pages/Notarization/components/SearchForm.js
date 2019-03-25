@@ -14,10 +14,11 @@ class SearchForm extends Component {
     time: '',
     num: '',
     field: null,
+    area: '',
   };
   search = () => {
-    const { time, num, field } = this.state;
-    if (time === '' || num === '' || field === null) {
+    const { time, num, field, area } = this.state;
+    if (time === '' || num === '' || field === null || area === '') {
       message.error('请输入完整信息后查询');
     } else {
       let effect = this.props.type === 'js' ? 'fetchJS' : 'fetchSD';
@@ -27,6 +28,7 @@ class SearchForm extends Component {
           year: time,
           bh: num,
           office: field,
+          area: area,
         },
       });
       this.props.dispatch({
@@ -41,6 +43,19 @@ class SearchForm extends Component {
   changeField = (value) => {
     this.setState({
       field: value,
+    });
+  };
+
+  changeArea = (value) => {
+    console.log(value);
+    this.setState({
+      area: value,
+    });
+    this.props.dispatch({
+      type: 'notarization/fetchNotarizationList',
+      payload: {
+        area: value,
+      },
     });
   };
 
@@ -63,7 +78,8 @@ class SearchForm extends Component {
     };
     // const { getFieldDecorator } = this.props.form;
     const { time, num } = this.state;
-    const { office } = this.props;
+    const { area } = this.props;
+    const { notarizationList } = this.props.notarization;
     return (
       <Form layout='vertical'>
         <Row>
@@ -85,12 +101,25 @@ class SearchForm extends Component {
           </Col>
           <Col span={24}>
             <Form.Item
+              label="区域"
+              labelCol={{ span: 20 }}
+              wrapperCol={{ span: 15 }}
+            >
+              <Select placeholder="选择区域" onChange={this.changeArea}>
+                {area.map((value, index) => (
+                  <Option key={index} value={value.id}>{value.name}</Option>
+                ))}
+              </Select>
+            </Form.Item>
+          </Col>
+          <Col span={24}>
+            <Form.Item
               label="公证处"
               labelCol={{ span: 20 }}
               wrapperCol={{ span: 15 }}
             >
               <Select placeholder="选择公证处" onChange={this.changeField}>
-                {office.map((value, index) => (
+                {notarizationList.map((value, index) => (
                   <Option key={index} value={value.id}>{value.name}</Option>
                 ))}
               </Select>

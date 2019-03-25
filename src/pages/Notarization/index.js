@@ -133,26 +133,26 @@ const columns2 = [{
 class Index extends Component {
   componentDidMount() {
     this.props.dispatch({
-      type: 'notarization/fetchNotarizationList',
+      type: 'notarization/fetchAreaList',
       payload: {},
     });
   }
 
   render() {
-    const { searchList, notarizationList, searchColumns } = this.props.notarization;
+    const { searchList, searchColumns, areaList } = this.props.notarization;
     return (
       <DynamicTitle>
         <div className={styles['search-box']}>
           <div>
             <div>寄送查询</div>
             <div>
-              <SearchForm type='js' office={notarizationList}/>
+              <SearchForm type='js' area={areaList}/>
             </div>
           </div>
           <div style={{ marginLeft: 55 }}>
             <div>收到查询</div>
             <div>
-              <SearchForm type='sd' office={notarizationList}/>
+              <SearchForm type='sd' area={areaList}/>
             </div>
           </div>
         </div>
