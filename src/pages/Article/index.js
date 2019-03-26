@@ -78,7 +78,7 @@ class Index extends Component {
           <div className={styles['title']}>{article.title}</div>
           <div className={styles['desc']}>
             <div>发表时间：{article.createDate}</div>
-            <div>来源：{article.user && article.user.name}</div>
+            <div>来源：{article.articleData && (article.articleData.copyfrom || '暂无')}</div>
           </div>
           <div className={styles['content']}
                dangerouslySetInnerHTML={{ __html: article.articleData && article.articleData.content }}/>

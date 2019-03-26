@@ -36,6 +36,9 @@ const columns = [{
   title: '公证日期',
   key: 'gzDate',
   dataIndex: 'gzDate',
+  render: (text, record) => {
+    return text.substr(0, 10)
+  }
 }, {
   title: '类别',
   key: 'leibie',

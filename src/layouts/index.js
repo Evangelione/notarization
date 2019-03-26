@@ -168,7 +168,7 @@ class Index extends Component {
           {/*页脚*/}
           <div className={styles['footer']}>
             <div>
-              地址：杭州市文三路252号伟星大厦20楼&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;邮编：310012&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;传真：0571-85112963&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;电话：0571-85112963
+              地址：杭州市文三路252号伟星大厦20楼A座&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;邮编：310012&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;传真：0571-85112963&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;电话：0571-85112963
             </div>
             <div>
               2011 All rights reserved 浙江公证网版权所有&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;浙ICP备15032864号-1
