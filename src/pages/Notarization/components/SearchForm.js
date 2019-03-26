@@ -48,7 +48,6 @@ class SearchForm extends Component {
   };
 
   changeArea = (value) => {
-    console.log(value);
     this.setState({
       area: value,
     });
@@ -80,7 +79,6 @@ class SearchForm extends Component {
     // const { getFieldDecorator } = this.props.form;
     const { time, num } = this.state;
     const { area, type } = this.props;
-    console.log(type);
     const { notarizationList } = this.props.notarization;
     return (
       <Form layout='vertical'>

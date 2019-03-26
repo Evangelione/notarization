@@ -53,7 +53,6 @@ class Index extends Component {
 
   downLoadFile = (fileStr) => {
     let fileArr = fileStr.split('|');
-    console.log(fileArr);
     fileArr.map((value => {
       if (value === '') return false;
       let aLink = document.createElement('a');

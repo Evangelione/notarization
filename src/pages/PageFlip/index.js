@@ -10,7 +10,6 @@ import styles from '@/pages/ReportDownload/index.less';
 class Index extends Component {
   componentDidMount() {
     const { articleId } = this.props.location.query;
-    console.log(articleId);
     this.props.dispatch({
       type: 'global/fetchQK',
       payload: {

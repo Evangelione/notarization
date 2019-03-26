@@ -12,7 +12,6 @@ class Index extends Component {
   render() {
     const { location, children } = this.props;
     const { module } = location.query;
-    console.log(module);
     const breadcrumbNameMap = {
       '/dynamicList': `${module}`,
       '/notarization': `${module}`,

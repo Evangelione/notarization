@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { List } from 'antd';
+import { List, Empty } from 'antd';
 import DynamicTitle from '../../components/DynamicTitle/index';
 import { connect } from 'dva';
 import styles from '@/pages/ReportDownload/index.less';
@@ -74,11 +74,11 @@ class Index extends Component {
     const { article } = this.props.global;
     return (
       <DynamicTitle>
-        <div style={{ padding: '0 134px' }}>
+        {article.title ? <div style={{ padding: '0 134px' }}>
           <div className={styles['title']}>{article.title}</div>
           <div className={styles['desc']}>
             <div>发表时间：{article.createDate}</div>
-            <div>来源：{article.articleData && (article.articleData.copyfrom || '暂无')}</div>
+            <div>来源：{article.articleData.copyfrom || article.user.name}</div>
           </div>
           <div className={styles['content']}
                dangerouslySetInnerHTML={{ __html: article.articleData && article.articleData.content }}/>
@@ -108,7 +108,7 @@ class Index extends Component {
                     </List.Item>;
                   }}/>
           </div>
-        </div>
+        </div> : <Empty/>}
       </DynamicTitle>
     );
   }

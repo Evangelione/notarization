@@ -13,6 +13,13 @@ const columns = [{
   title: '寄出日期',
   dataIndex: 'jsDate',
   key: 'jsDate',
+  render: (text, record) => {
+    if(text) {
+      return text.substr(0, 10);
+    } else {
+      return ''
+    }
+  },
 }, {
   title: '姓名',
   dataIndex: 'name',
@@ -37,8 +44,12 @@ const columns = [{
   key: 'gzDate',
   dataIndex: 'gzDate',
   render: (text, record) => {
-    return text.substr(0, 10)
-  }
+    if(text) {
+      return text.substr(0, 10);
+    } else {
+      return ''
+    }
+  },
 }, {
   title: '类别',
   key: 'leibie',
@@ -65,6 +76,13 @@ const columns2 = [{
   title: '寄送日期',
   dataIndex: 'sdDate',
   key: 'sdDate',
+  render: (text, record) => {
+    if(text) {
+      return text.substr(0, 10);
+    } else {
+      return ''
+    }
+  },
 }, {
   title: '公证处',
   key: 'company',
@@ -88,6 +106,13 @@ const columns2 = [{
   title: '出证日期',
   key: 'gzDate',
   dataIndex: 'gzDate',
+  render: (text, record) => {
+    if(text) {
+      return text.substr(0, 10);
+    } else {
+      return ''
+    }
+  },
 }, {
   title: '编号',
   key: 'no',
