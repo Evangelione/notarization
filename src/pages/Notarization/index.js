@@ -154,13 +154,13 @@ class Index extends Component {
           <div>
             <div>寄送查询</div>
             <div>
-              <SearchForm type='js' area={areaList2}/>
+              {areaList.length && <SearchForm type='js' area={areaList}/>}
             </div>
           </div>
           <div style={{ marginLeft: 55 }}>
             <div>收到查询</div>
             <div>
-              <SearchForm type='sd' area={areaList}/>
+              {areaList.length && <SearchForm type='sd' area={areaList2}/>}
             </div>
           </div>
         </div>

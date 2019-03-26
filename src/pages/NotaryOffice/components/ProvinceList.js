@@ -20,9 +20,8 @@ class ProvinceList extends Component {
     return (
       <div style={{ marginTop: 30 }}>
         {province.map((value, index) => {
-          if (value.officeList.length === 0) {
-            return null;
-          }
+          if (value.officeList.length === 0) return null;
+          if (value.name === '台湾') return null;
           return <div key={index} style={{ marginTop: 30 }}>
             <div className={styles['province-label']}>{value.name}</div>
             <Row>

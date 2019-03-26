@@ -16,6 +16,7 @@ class SearchForm extends Component {
     field: null,
     area: '',
   };
+
   search = () => {
     const { time, num, field, area } = this.state;
     if (time === '' || num === '' || field === null || area === '') {
@@ -78,7 +79,8 @@ class SearchForm extends Component {
     };
     // const { getFieldDecorator } = this.props.form;
     const { time, num } = this.state;
-    const { area } = this.props;
+    const { area, type } = this.props;
+    console.log(type);
     const { notarizationList } = this.props.notarization;
     return (
       <Form layout='vertical'>
