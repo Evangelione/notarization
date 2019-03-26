@@ -9,6 +9,7 @@ export default {
     notarizationList: [],
     searchColumns: 'col1',
     areaList: [],
+    areaList2: [],
   },
 
   subscriptions: {
@@ -55,13 +56,25 @@ export default {
         :
         message.error(data.message);
     },
-    * fetchAreaList({ payload }, { call, put }) {
-      const { data } = yield call(notarizationServices.fetchAreaList);
+    * fetchAreaList({ payload: { leibie } }, { call, put }) {
+      const { data } = yield call(notarizationServices.fetchAreaList, leibie);
       parseInt(data.code, 10) === 1 ?
         yield put({
           type: 'save',
           payload: {
             areaList: data.data,
+          },
+        })
+        :
+        message.error(data.message);
+    },
+    * fetchAreaList2({ payload: { leibie } }, { call, put }) {
+      const { data } = yield call(notarizationServices.fetchAreaList, leibie);
+      parseInt(data.code, 10) === 1 ?
+        yield put({
+          type: 'save',
+          payload: {
+            areaList2: data.data,
           },
         })
         :

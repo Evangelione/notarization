@@ -134,19 +134,27 @@ class Index extends Component {
   componentDidMount() {
     this.props.dispatch({
       type: 'notarization/fetchAreaList',
-      payload: {},
+      payload: {
+        leibie: 0,
+      },
+    });
+    this.props.dispatch({
+      type: 'notarization/fetchAreaList2',
+      payload: {
+        leibie: 1,
+      },
     });
   }
 
   render() {
-    const { searchList, searchColumns, areaList } = this.props.notarization;
+    const { searchList, searchColumns, areaList, areaList2 } = this.props.notarization;
     return (
       <DynamicTitle>
         <div className={styles['search-box']}>
           <div>
             <div>寄送查询</div>
             <div>
-              <SearchForm type='js' area={areaList}/>
+              <SearchForm type='js' area={areaList2}/>
             </div>
           </div>
           <div style={{ marginLeft: 55 }}>

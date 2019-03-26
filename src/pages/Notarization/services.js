@@ -28,8 +28,8 @@ export function fetchNotarizationList2(area) {
   });
 }
 
-export function fetchAreaList() {
-  return request(`http://118.31.46.146:8080/api/office/area`, {
+export function fetchAreaList(leibie) {
+  return request(`http://118.31.46.146:8080/api/office/area?leibie=${leibie}`, {
     method: 'GET',
     credentials: 'omit',
   });
