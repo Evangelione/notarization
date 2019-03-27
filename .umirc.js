@@ -7,7 +7,7 @@ export default {
       antd: true,
       dva: true,
       dynamicImport: { webpackChunkName: true },
-      title: 'Notarization',
+      title: '浙江公证网',
       dll: true,
       routes: {
         exclude: [
