@@ -1,5 +1,5 @@
 import request from '@/common/request';
-import { pageSize } from '@/common/constants';
+import { pageSize, api } from '@/common/constants';
 
 // export function inquireCascadeOptions({ module, district_name }) {
 //   let formData = new FormData()
@@ -33,14 +33,14 @@ import { pageSize } from '@/common/constants';
 // }
 
 export function fetchNavBar() {
-  return request('http://118.31.46.146:8080/api/category', {
+  return request(`${api}/api/category`, {
     method: 'GET',
     credentials: 'omit',
   });
 }
 
 export function fetchArticle(id) {
-  return request(`http://118.31.46.146:8080/api/article?articleId=${id}`, {
+  return request(`${api}/api/article?articleId=${id}`, {
     method: 'GET',
     credentials: 'omit',
   });
@@ -48,77 +48,77 @@ export function fetchArticle(id) {
 
 
 export function fetchDynamicList({ id, pageNo }) {
-  return request(`http://118.31.46.146:8080/api/article/list?categoryId=${id}&pageNo=${pageNo}&pageSize=${pageSize}`, {
+  return request(`${api}/api/article/list?categoryId=${id}&pageNo=${pageNo}&pageSize=${pageSize}`, {
     method: 'GET',
     credentials: 'omit',
   });
 }
 
 export function searchList({ keyword, pageNo }) {
-  return request(`http://118.31.46.146:8080/api/search?keyword=${keyword}&pageNo=${pageNo}&pageSize=${pageSize}`, {
+  return request(`${api}/api/search?keyword=${keyword}&pageNo=${pageNo}&pageSize=${pageSize}`, {
     method: 'GET',
     credentials: 'omit',
   });
 }
 
 export function fetchCarouselMap() {
-  return request(`http://118.31.46.146:8080/api/image/article`, {
+  return request(`${api}/api/image/article`, {
     method: 'GET',
     credentials: 'omit',
   });
 }
 
 export function fetchNavBarList() {
-  return request(`http://118.31.46.146:8080/api/three/article`, {
+  return request(`${api}/api/three/article`, {
     method: 'GET',
     credentials: 'omit',
   });
 }
 
 export function fetchMiddleBar() {
-  return request(`http://118.31.46.146:8080/api/service/category`, {
+  return request(`${api}/api/service/category`, {
     method: 'GET',
     credentials: 'omit',
   });
 }
 
 export function fetchFriendLink() {
-  return request(`http://118.31.46.146:8080/api/links`, {
+  return request(`${api}/api/links`, {
     method: 'GET',
     credentials: 'omit',
   });
 }
 
 export function fetchOutLink() {
-  return request(`http://118.31.46.146:8080/api/outlinks`, {
+  return request(`${api}/api/outlinks`, {
     method: 'GET',
     credentials: 'omit',
   });
 }
 
 export function fetchMainList() {
-  return request(`http://118.31.46.146:8080/api/mainList`, {
+  return request(`${api}/api/mainList`, {
     method: 'GET',
     credentials: 'omit',
   });
 }
 
 export function fetchOfficeList() {
-  return request(`http://118.31.46.146:8080/api/office/list`, {
+  return request(`${api}/api/office/list`, {
     method: 'GET',
     credentials: 'omit',
   });
 }
 
 export function fetchOfficeInfo(id) {
-  return request(`http://118.31.46.146:8080/api/office?officeId=${id}`, {
+  return request(`${api}/api/office?officeId=${id}`, {
     method: 'GET',
     credentials: 'omit',
   });
 }
 
 export function fetchQK(articleId) {
-  return request(`http://118.31.46.146:8080/api/journal/article?articleId=${articleId}`, {
+  return request(`${api}/api/journal/article?articleId=${articleId}`, {
     method: 'GET',
     credentials: 'omit',
   });

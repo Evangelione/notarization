@@ -154,7 +154,7 @@ class Index extends Component {
           {middleBar.map((value, index) => {
             return <div key={index} onClick={this.goDynamicList.bind(null, value.href, value.name, value.id)}>
               {/*<IconFont type={value.icon} style={{ fontSize: 26 }}/>*/}
-              <img src={`http://118.31.46.146:8080${value.image}`} style={{ width: 26, height: 26 }} alt=""/>
+              <img src={`http://admin.zjgz.org${value.image}`} style={{ width: 26, height: 26 }} alt=""/>
               <div style={{ width: 70 }}>{value.name}</div>
             </div>;
           })}

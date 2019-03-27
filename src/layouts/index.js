@@ -7,6 +7,7 @@ import 'moment/locale/zh-cn';
 import { connect } from 'dva';
 import router from 'umi/router';
 import styles from './index.less';
+import { api } from '@/common/constants';
 
 moment.locale('zh-cn');
 const Search = Input.Search;
@@ -138,7 +139,7 @@ class Index extends Component {
                   <div>{this.getCurrDate()}</div>
                   <Button style={{ marginLeft: 20, borderColor: '#C72D29', color: '#C72D29' }} size='small'
                           onClick={() => {
-                            window.location.href = 'http://118.31.46.146:8080/a/login';
+                            window.location.href = `${api}/a/login`;
                           }}>登录</Button>
                 </div>
               </div>

@@ -1,5 +1,7 @@
 import { Icon } from 'antd';
 
+export const api = 'http://admin.zjgz.org';
+
 export const IconFont = Icon.createFromIconfontCN({
   scriptUrl: '//at.alicdn.com/t/font_1021230_9ws4os27oyb.js', // 在 iconfont.cn 上生成
 });

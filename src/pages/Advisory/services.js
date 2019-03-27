@@ -1,8 +1,8 @@
 import request from '@/common/request';
-import { pageSize } from '@/common/constants';
+import { pageSize, api } from '@/common/constants';
 
 export function fetchAdvisoryList(pageNo) {
-  return request(`http://118.31.46.146:8080/api/guestbook/list?pageNo=${pageNo}&pageSize=${pageSize}`, {
+  return request(`${api}/api/guestbook/list?pageNo=${pageNo}&pageSize=${pageSize}`, {
     method: 'GET',
     credentials: 'omit',
   });
@@ -11,7 +11,7 @@ export function fetchAdvisoryList(pageNo) {
 export function postAdvisory(value) {
   let formData = new FormData();
   formData.append('content', value);
-  return request(`http://118.31.46.146:8080/api/guestbook`, {
+  return request(`${api}/api/guestbook`, {
     method: 'POST',
     credentials: 'omit',
     body: formData,
@@ -21,7 +21,7 @@ export function postAdvisory(value) {
 export function useful(id) {
   let formData = new FormData();
   formData.append('guestbookId', id);
-  return request(`http://118.31.46.146:8080/api/guestbook/zan`, {
+  return request(`${api}/api/guestbook/zan`, {
     method: 'POST',
     credentials: 'omit',
     body: formData,

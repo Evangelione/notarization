@@ -78,7 +78,7 @@ class SearchForm extends Component {
     };
     // const { getFieldDecorator } = this.props.form;
     const { time, num } = this.state;
-    const { area, type } = this.props;
+    const { area } = this.props;
     const { notarizationList } = this.props.notarization;
     return (
       <Form layout='vertical'>
