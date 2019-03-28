@@ -55,6 +55,7 @@ class SearchForm extends Component {
       type: 'notarization/fetchNotarizationList',
       payload: {
         area: value,
+        type: this.props.type,
       },
     });
   };
@@ -79,7 +80,7 @@ class SearchForm extends Component {
     // const { getFieldDecorator } = this.props.form;
     const { time, num } = this.state;
     const { area } = this.props;
-    const { notarizationList } = this.props.notarization;
+    const { notarizationListJS, notarizationListSD } = this.props.notarization;
     return (
       <Form layout='vertical'>
         <Row>
@@ -119,7 +120,9 @@ class SearchForm extends Component {
               wrapperCol={{ span: 15 }}
             >
               <Select placeholder="选择公证处" onChange={this.changeField}>
-                {notarizationList.map((value, index) => (
+                {this.props.type === 'js' ? notarizationListJS.map((value, index) => (
+                  <Option key={index} value={value.id}>{value.name}</Option>
+                )) : notarizationListSD.map((value, index) => (
                   <Option key={index} value={value.id}>{value.name}</Option>
                 ))}
               </Select>

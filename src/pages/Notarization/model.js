@@ -6,7 +6,8 @@ export default {
   namespace: 'notarization',
   state: {
     searchList: [],
-    notarizationList: [],
+    notarizationListJS: [],
+    notarizationListSD: [],
     searchColumns: 'col1',
     areaList: [],
     areaList2: [],
@@ -44,17 +45,27 @@ export default {
         :
         message.error(data.message);
     },
-    * fetchNotarizationList({ payload: { area } }, { call, put }) {
+    * fetchNotarizationList({ payload: { area, type } }, { call, put }) {
       const { data } = yield call(notarizationServices.fetchNotarizationList2, area);
-      parseInt(data.code, 10) === 1 ?
-        yield put({
-          type: 'save',
-          payload: {
-            notarizationList: data.data,
-          },
-        })
-        :
+      if (parseInt(data.code, 10) === 1) {
+        if (type === 'js') {
+          yield put({
+            type: 'save',
+            payload: {
+              notarizationListJS: data.data,
+            },
+          });
+        } else {
+          yield put({
+            type: 'save',
+            payload: {
+              notarizationListSD: data.data,
+            },
+          });
+        }
+      } else {
         message.error(data.message);
+      }
     },
     * fetchAreaList({ payload: { leibie } }, { call, put }) {
       const { data } = yield call(notarizationServices.fetchAreaList, leibie);
