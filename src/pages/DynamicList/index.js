@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import { Pagination } from 'antd';
-import { connect } from 'dva';
+import React, {Component} from 'react';
+import {Pagination} from 'antd';
+import {connect} from 'dva';
 import DynamicTitle from '../../components/DynamicTitle/index';
 import List from '@/components/List/index';
 
 // import { list3 } from '@/common/constants';
 
-@connect(({ global }) => ({
+@connect(({global}) => ({
   global,
 }))
 class Index extends Component {
@@ -31,7 +31,7 @@ class Index extends Component {
       type: 'global/fetchDynamicList',
       payload: {
         id: this.props.location.query.id,
-        page,
+        pageNo: page,
       },
     });
   };
@@ -41,7 +41,7 @@ class Index extends Component {
       type: 'global/searchList',
       payload: {
         keyword: this.props.location.query.find_str,
-        page,
+        pageNo: page,
       },
     });
   };
@@ -51,13 +51,15 @@ class Index extends Component {
   };
 
   render() {
-    const { dynamicList, dynamicPage, dynamicTotal } = this.props.global;
+    const {dynamicList, dynamicPage, dynamicTotal} = this.props.global;
+    console.log(dynamicList)
     return (
       <DynamicTitle>
         <List list={dynamicList} hasLine={5}/>
         {dynamicTotal ?
-          <Pagination showQuickJumper defaultCurrent={dynamicPage} total={dynamicTotal} onChange={this.pageChange}
-                      style={{ marginTop: 30, marginBottom: 5 }}/> : null}
+          <Pagination showQuickJumper defaultCurrent={dynamicPage} defaultPageSize={20} total={dynamicTotal}
+                      onChange={this.pageChange}
+                      style={{marginTop: 30, marginBottom: 5}}/> : null}
 
       </DynamicTitle>
     );
