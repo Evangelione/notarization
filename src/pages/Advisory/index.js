@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import { Button, Modal, Input, Pagination } from 'antd';
+import React, {Component} from 'react';
+import {Button, Modal, Input, Pagination} from 'antd';
 import DynamicTitle from '../../components/DynamicTitle/index';
-import { IconFont } from '@/common/constants';
+import {IconFont} from '@/common/constants';
 import styles from './index.less';
-import { connect } from 'dva';
+import {connect} from 'dva';
 
 const TextArea = Input.TextArea;
 
@@ -33,7 +33,7 @@ const TextArea = Input.TextArea;
 //   link: false,
 // }];
 
-@connect(({ advisory }) => ({
+@connect(({advisory}) => ({
   advisory,
 }))
 class Index extends Component {
@@ -107,44 +107,45 @@ class Index extends Component {
   };
 
   render() {
-    const { visible, advisoryContent } = this.state;
-    const { advisoryList, advisoryPage, advisoryTotal } = this.props.advisory;
+    const {visible, advisoryContent} = this.state;
+    const {advisoryList, advisoryPage, advisoryTotal} = this.props.advisory;
     return (
       <div>
         <DynamicTitle>
-          <div style={{ textAlign: 'right', marginTop: 20 }}>
+          <div style={{textAlign: 'right', marginTop: 20}}>
             <Button type='primary' onClick={this.showModal}>我要咨询</Button>
           </div>
         </DynamicTitle>
-        <div style={{ marginTop: 24 }}>
+        <div style={{marginTop: 24}}>
           {advisoryList.map((value, index) => {
             return <div className={styles['question-box']} key={index}>
-              <div className={styles['question']}><span style={{ fontSize: 34 }}>Q. </span>{value.content}</div>
+              <div className={styles['question']}><span style={{fontSize: 34}}>Q. </span>{value.content}</div>
               <div className={styles['answers']}>
-                <div><span style={{ fontSize: 34, color: '#000' }}>A. </span>{value.reContent}</div>
+                <div><span style={{fontSize: 34, color: '#000'}}>A. </span>{value.reContent}</div>
               </div>
               <div className={styles['extend']}>
-                <div style={{ marginRight: 44, cursor: 'pointer' }} onClick={this.useful.bind(null, value.id)}>
-                  <IconFont type='icon-dianzan_' style={{ marginRight: 8, cursor: 'pointer' }}/>{value.zan}
+                <div style={{marginRight: 44, cursor: 'pointer'}} onClick={this.useful.bind(null, value.id)}>
+                  <IconFont type='icon-dianzan_' style={{marginRight: 8, cursor: 'pointer'}}/>{value.zan}
                 </div>
-                <div><IconFont type='icon-shijian_' style={{ marginRight: 8 }}/>{value.createDate}</div>
+                <div><IconFont type='icon-shijian_' style={{marginRight: 8}}/>{value.createDate}</div>
               </div>
             </div>;
           })}
         </div>
-        <div style={{ textAlign: 'center', marginBottom: 30 }}>
-          <Pagination showQuickJumper defaultCurrent={advisoryPage} total={advisoryTotal} onChange={this.pageChange}
-                      style={{ marginTop: 30, marginBottom: 5 }}/>
+        <div style={{textAlign: 'center', marginBottom: 30}}>
+          <Pagination showQuickJumper defaultCurrent={advisoryPage} defaultPageSize={20} total={advisoryTotal}
+                      onChange={this.pageChange}
+                      style={{marginTop: 30, marginBottom: 5}}/>
         </div>
         <Modal
           visible={visible}
           footer={null}
-          style={{ textAlign: 'center' }}
+          style={{textAlign: 'center'}}
           onCancel={this.hideModal}>
-          <div style={{ fontSize: 24, textAlign: 'center', marginBottom: 30 }}>咨询</div>
-          <TextArea placeholder='请输入你要咨询的内容' style={{ height: 135 }} value={advisoryContent}
+          <div style={{fontSize: 24, textAlign: 'center', marginBottom: 30}}>咨询</div>
+          <TextArea placeholder='请输入你要咨询的内容' style={{height: 135}} value={advisoryContent}
                     onChange={this.changeAdvisoryContent}/>
-          <Button type='primary' style={{ marginTop: 30, textAlign: 'center' }} onClick={this.postAdvisory}>咨询</Button>
+          <Button type='primary' style={{marginTop: 30, textAlign: 'center'}} onClick={this.postAdvisory}>咨询</Button>
         </Modal>
       </div>
     );

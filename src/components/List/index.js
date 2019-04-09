@@ -55,7 +55,7 @@ class Index extends Component {
             return <div key={index} onClick={this.goArticle.bind(null, value.id, value)}>
               <div className={styles['list-item']}>
                 <div>{value.title}</div>
-                <div>[{value.updateDate}]</div>
+                <div>[{value.updateDate.substr(0, 10)}]</div>
               </div>
               <div className={styles['dashed-line']}/>
             </div>;
