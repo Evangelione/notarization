@@ -37,13 +37,7 @@ class Index extends Component {
         createDate: value.createDate,
         userName: value.user ? value.user.name : '暂无',
       },
-    }) : router.push({
-      pathname: '/article',
-      query: {
-        module: this.props.title ? this.props.title : module,
-        articleId: id,
-      },
-    });
+    }) : window.open(`/article?articleId=${id}&module=${this.props.title ? this.props.title : module}`);
   };
 
   render() {
