@@ -25,4 +25,7 @@ export default {
   theme: {
     'primary-color': '#C72D29',
   },
+  targets: {
+    ie: 10,
+  },
 };
