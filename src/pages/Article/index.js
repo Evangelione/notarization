@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { List, Empty } from 'antd';
+import { List, Empty, Button } from 'antd';
 import DynamicTitle from '../../components/DynamicTitle/index';
 import { connect } from 'dva';
 import styles from '@/pages/ReportDownload/index.less';
@@ -70,10 +70,37 @@ class Index extends Component {
     });
   };
 
+  downLoadFile = (fileStr) => {
+    let fileArr = fileStr.split('|');
+    fileArr.map((value => {
+      if (value === '') return false;
+      // let aLink = document.createElement('a');
+      // aLink.download = '';
+      // aLink.href = value;
+      // document.body.appendChild(aLink);
+      // aLink.click();
+      // document.body.removeChild(aLink);
+      const iframe = document.createElement('iframe');
+      iframe.style.display = 'none'; // 防止影响页面
+      iframe.style.height = 0; // 防止影响页面
+      iframe.src = value;
+      document.body.appendChild(iframe); // 这一行必须，iframe挂在到dom树上才会发请求
+      // 5分钟之后删除（onload方法对于下载链接不起作用，就先抠脚一下吧）
+      setTimeout(() => {
+        iframe.remove();
+      }, 30 * 1000);
+      return true;
+    }));
+  };
+
   render() {
     const { article } = this.props.global;
     return (
       <DynamicTitle>
+        <div style={{ textAlign: 'right' }}>
+          {article.files ? <Button type='primary' icon='cloud-download'
+                                   onClick={this.downLoadFile.bind(null, article.files)}>下载本篇附件</Button> : null}
+        </div>
         {article.title ? <div style={{ padding: '0 134px' }}>
           <div className={styles['title']}>{article.title}</div>
           <div className={styles['desc']}>

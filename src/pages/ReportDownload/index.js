@@ -54,6 +54,7 @@ class Index extends Component {
   downLoadFile = (fileStr) => {
     let fileArr = fileStr.split('|');
     fileArr.map((value => {
+      debugger
       if (value === '') return false;
       let aLink = document.createElement('a');
       aLink.download = '';
@@ -70,8 +71,8 @@ class Index extends Component {
     return (
       <DynamicTitle>
         <div style={{ textAlign: 'right' }}>
-          <Button type='primary' icon='cloud-download'
-                  onClick={this.downLoadFile.bind(null, article.files)}>下载本篇附件</Button>
+          {article.files ? <Button type='primary' icon='cloud-download'
+                                   onClick={this.downLoadFile.bind(null, article.files)}>下载本篇附件</Button> : null}
         </div>
         <div style={{ padding: '0 134px' }}>
           <div className={styles['title']}>{article.title}</div>
